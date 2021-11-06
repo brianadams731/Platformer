@@ -33,6 +33,7 @@ class Player extends Controller{
     }
 
     collide():void{
+        // TODO ACCEPT ARRAY OF COLLISION OBJECTS AS AN ARGUMENT THAT IS GENERATED WHEN CHECKING OVERALL COLLISIONS
         const collisionArray:collision[] = [];
         collisionArray.push({
             collided:true,
@@ -75,7 +76,7 @@ class Player extends Controller{
                 height:1000,
             }
         })
-        
+
         collisionArray.forEach((item)=>{
             this.character.collisionWithSolid(item);
         })
