@@ -1,8 +1,9 @@
 import * as PIXI from "pixi.js";
 import { Character } from "../characters/Character"
-abstract class Controller{
-    protected character:Character
+import { Collidable, collision, GivesCollisionData } from "../interfaces/collisions";
 
+abstract class Controller implements Collidable, GivesCollisionData{
+    protected character:Character
     constructor(character:Character){
         this.character = character;
     }
@@ -10,11 +11,16 @@ abstract class Controller{
     public update():void{
         this.character.update();
     }
-
     public draw(app:PIXI.Application):void{
         this.character.draw(app);
     }
-
+    public pushToColliderArray(collisionObj:collision){
+        this.character.pushToColliderArray(collisionObj);
+    }
+    public getCollisionData(){
+        return this.character.getCollisionData();
+    }
+    
     protected moveRight():void{
         this.character.moveRight();
     }
@@ -24,8 +30,6 @@ abstract class Controller{
     protected jump():void{
         this.character.jump();
     }
-
-    abstract collide():void;
 }
 
 export {Controller};

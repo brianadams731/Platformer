@@ -1,7 +1,7 @@
 import { collision } from "../interfaces/collisions";
-import { dimensions } from "../interfaces/dimensions";
+import { collisionData } from "../interfaces/collisions";
 
-export function checkCollision(self:dimensions,other:dimensions):collision{
+export function checkCollision(self:collisionData,other:collisionData):collision{
     const collisionObj:collision = {
         collided:false,
         topCollided:false,

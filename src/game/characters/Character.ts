@@ -1,10 +1,9 @@
 import * as PIXI from "pixi.js";
 //import {AnimatedEntity} from "../AnimatedEntity";
 import {Moves} from "./Moves";
-import {GivesDimensions, dimensions} from "../interfaces/dimensions";
-import {collision} from "../interfaces/collisions";
+import {Collidable,collision, GivesCollisionData, collisionData} from "../interfaces/collisions";
 
-abstract class Character implements GivesDimensions{
+abstract class Character implements GivesCollisionData, Collidable{
     //private character:AnimatedEntity;
     private moves:Moves;
     private x:number;
@@ -12,6 +11,9 @@ abstract class Character implements GivesDimensions{
 
     private height:number;
     private width: number;
+
+    private collisionArray: collision[];
+    private collisionProperties: string[];
 
     constructor(x:number, y:number, maxXVelocity:number, maxYVelocity:number, speed:number, jumpHeight:number){
         //this.character = new AnimatedEntity(0,0);
@@ -21,15 +23,21 @@ abstract class Character implements GivesDimensions{
 
         this.height = 32;
         this.width = 32;
+
+        this.collisionArray = [];
+        this.collisionProperties = [];
     }
 
 
     public update(){
+        this.moves.resetMoveConstraints();
+        this.resolveCollisions();
+        this.moves.update();
+
         this.x = this.moves.updateX(this.x);
         this.y = this.moves.updateY(this.y);
         //this.character.setX(this.x);
         //this.character.setY(this.y);
-        this.moves.update();
     }
 
     public draw(app:PIXI.Application){
@@ -58,6 +66,17 @@ abstract class Character implements GivesDimensions{
         this.moves.resetMoveConstraints();
     }
 
+    private resolveCollisions(){
+        for (let i = this.collisionArray.length - 1; i >= 0; i--) {
+            if(this.collisionArray[i].collider.collisionProperties.includes("solid")){
+                this.collisionWithSolid(this.collisionArray[i]);
+            }
+            // Splice out the collision
+            this.collisionArray.splice(i, 1);
+        }
+    }
+
+
     public collisionWithSolid(collisionObj:collision){
         this.moves.collisionWithSolid(collisionObj);
         
@@ -75,13 +94,21 @@ abstract class Character implements GivesDimensions{
         }
     }
 
-    public getDimensions():dimensions{
+    public pushToColliderArray(collisionObj:collision):void{
+        this.collisionArray.push(collisionObj);
+    }
+
+    public getCollisionData():collisionData{
         return {
             x:this.x,
             y:this.y,
             height:this.height,  // this.character.getHeight() TODO SWITCH TO CHAR DIMENSIONS 
-            width:this.width    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
+            width:this.width,    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
+            collisionProperties:this.collisionProperties,
         }
+    }
+    protected setCollisionProperties(collisionProperties: string[]){
+        this.collisionProperties = collisionProperties;
     }
 
 }
