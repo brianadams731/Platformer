@@ -1,29 +1,31 @@
 import * as PIXI from "pixi.js";
 import { Character } from "../characters/Character"
-class Controller{
-    private character:Character
+abstract class Controller{
+    protected character:Character
 
-    constructor(charicter:Character){
-        this.character = charicter;
+    constructor(character:Character){
+        this.character = character;
     }
 
-    public update(){
+    public update():void{
         this.character.update();
     }
 
-    public draw(app:PIXI.Application){
+    public draw(app:PIXI.Application):void{
         this.character.draw(app);
     }
 
-    protected moveRight(){
+    protected moveRight():void{
         this.character.moveRight();
     }
-    protected moveLeft(){
+    protected moveLeft():void{
         this.character.moveLeft();
     }
-    protected jump(){
+    protected jump():void{
         this.character.jump();
     }
+
+    abstract collide():void;
 }
 
 export {Controller};

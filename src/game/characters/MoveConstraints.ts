@@ -1,3 +1,5 @@
+import {collision} from "../interfaces/collisions";
+
 class MoveConstraints{
     private canMoveRight: boolean;
     private canMoveLeft: boolean;
@@ -34,6 +36,16 @@ class MoveConstraints{
         this.canMoveDown = canMoveDown;
     }
 
+    public collisionWithSolid(collisionObj:collision){
+        if(!collisionObj.collided){
+            return;
+        }
+        this.canMoveUp = collisionObj.topCollided?false:this.canMoveUp;
+        this.canMoveRight = collisionObj.rightCollided?false:this.canMoveRight;
+        this.canMoveLeft = collisionObj.leftCollided?false:this.canMoveLeft;
+        this.canMoveDown = collisionObj.bottomCollided?false:this.canMoveDown;
+    }
+
     public getCanMoveLeft():boolean{
         return this.canMoveLeft;
     }
@@ -47,9 +59,11 @@ class MoveConstraints{
         return this.canMoveDown;
     }
 
-
-    public update(){
-
+    public reset(){
+        this.canMoveDown = true;
+        this.canMoveUp = true;
+        this.canMoveLeft = true;
+        this.canMoveRight = true;
     }
 }
 

@@ -1,5 +1,6 @@
 import { MoveConstraints } from "./MoveConstraints";
 import { Velocity } from "./Velocity";
+import {collision} from "../interfaces/collisions";
 
 class Moves{
     private moveConstraints: MoveConstraints;
@@ -47,10 +48,21 @@ class Moves{
         return this.moveConstraints.normalizeY(this.velocity.getYVelocity(),y);
     }
 
+    public collisionWithSolid(collisionObj:collision){
+        this.moveConstraints.collisionWithSolid(collisionObj);
+    }
+
+    public resetMoveConstraints(){
+        this.moveConstraints.reset();
+    }
+    
     public update(){
+        
+
         if(!this.moveConstraints.getCanMoveDown()){ // on solid surface
             this.canJump = true;
         }
+
 
         this.velocity.update(
             this.moveConstraints.getCanMoveRight(),
@@ -59,7 +71,6 @@ class Moves{
             this.moveConstraints.getCanMoveDown()
         );
 
-        this.moveConstraints.update();
     }
 }
 
