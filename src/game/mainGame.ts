@@ -30,7 +30,7 @@ function mainGame(){
         player.draw(app);
     }
     
-    const dem1:dimensions = {
+    /*const dem1:dimensions = {
         x:0,
         y:0,
         height:10,
@@ -43,7 +43,7 @@ function mainGame(){
         width:10
     }
 
-    console.log(checkCollision(dem1,dem2))
+    console.log(checkCollision(dem1,dem2))*/
 }
 
 export {mainGame};
