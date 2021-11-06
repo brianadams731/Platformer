@@ -14,7 +14,7 @@ class Velocity{
         this.maxYVelocity = maxYVelocity;
 
         this.friction = .6;
-        this.gravity = 2;
+        this.gravity = 1.5;
     }
 
     public addToXVelocity(addToX:number){
@@ -71,7 +71,6 @@ class Velocity{
         }
         if(!canMoveDown){
             this.yVelocity = Math.min(this.yVelocity,0);
-            console.log(this.yVelocity);
         }
     }
 }

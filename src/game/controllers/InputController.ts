@@ -18,7 +18,7 @@ class InputController{
     }
 
     handleKeyDown(e:KeyboardEvent){
-        if(e.key === "w"){
+        if(e.key === "w" || e.key === " "){
             this.upPressed = true;
         }
         if(e.key === "d"){
@@ -33,8 +33,7 @@ class InputController{
     }
 
     handleKeyUp(e:KeyboardEvent){
-        if(e.key === "w" ||e.key === "Space"){
-            console.log("jump")
+        if(e.key === "w" || e.key === " "){
             this.upPressed = false;
         }
         if(e.key === "d"){

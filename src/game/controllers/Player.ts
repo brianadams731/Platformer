@@ -12,6 +12,11 @@ class Player extends Controller{
     }
     
     update(){
+        this.useInput();
+        super.update();
+    }
+
+    useInput(){
         if(this.inputController.getRightPressed()){
             this.moveRight()
         }
@@ -21,10 +26,7 @@ class Player extends Controller{
         if(this.inputController.getUpPressed()){
             this.jump();
         }
-        super.update();
     }
-
-
 }
 
 export {Player};

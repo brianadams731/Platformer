@@ -30,6 +30,10 @@ class MoveConstraints{
         return y;
     }
 
+    public setCanMoveDown(canMoveDown:boolean){
+        this.canMoveDown = canMoveDown;
+    }
+
     public getCanMoveLeft():boolean{
         return this.canMoveLeft;
     }
