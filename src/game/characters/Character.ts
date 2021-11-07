@@ -15,9 +15,9 @@ abstract class Character implements GivesCollisionData, Collidable{
     private collisionArray: collision[];
     private collisionProperties: string[];
 
-    constructor(x:number, y:number, maxXVelocity:number, maxYVelocity:number, speed:number, jumpHeight:number){
+    constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number){
         //this.character = new AnimatedEntity(0,0);
-        this.moves = new Moves(maxXVelocity,maxYVelocity,speed, jumpHeight)
+        this.moves = new Moves(maxXVelocity,speed, jumpHeight)
         this.x = x;
         this.y = y;
 
@@ -81,16 +81,16 @@ abstract class Character implements GivesCollisionData, Collidable{
         this.moves.collisionWithSolid(collisionObj);
         
         if(collisionObj.bottomCollided){
-            this.y = collisionObj.collider.y - this.height + 1;
+            this.y = collisionObj.collider.y - this.height;
         }
         if(collisionObj.topCollided){
-            this.y = collisionObj.collider.y + collisionObj.collider.height - 1
+            this.y = collisionObj.collider.y + collisionObj.collider.height;
         }
         if(collisionObj.leftCollided){
-            this.x = collisionObj.collider.x + collisionObj.collider.width  - 2;
+            this.x = collisionObj.collider.x + collisionObj.collider.width ;
         }
         if(collisionObj.rightCollided){
-            this.x = collisionObj.collider.x - this.width + 2;
+            this.x = collisionObj.collider.x - this.width;
         }
     }
 

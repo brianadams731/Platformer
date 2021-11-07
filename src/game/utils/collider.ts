@@ -19,7 +19,7 @@ export function checkCollision(self:collisionData,other:collisionData):collision
     // ToDO CITE FROM https://gamedev.stackexchange.com/questions/29786/a-simple-2d-rectangle-collision-algorithm-that-also-determines-which-sides-that
     if (Math.abs(dx) <= w && Math.abs(dy) <= h){
         collisionObj.collided = true;
-        const wy = w * dy;
+        const wy = w * dy * 2;
         const hx = h * dx;
         if (wy > hx){
             if (wy > -hx){

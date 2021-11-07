@@ -11,9 +11,9 @@ class Moves{
 
     private canJump:boolean;
 
-    constructor(maxXVelocity:number, maxYVelocity:number, horizontalSpeed:number, jumpHeight:number){
+    constructor(maxXVelocity:number, horizontalSpeed:number, jumpHeight:number){
         this.moveConstraints = new MoveConstraints();
-        this.velocity = new Velocity(maxXVelocity,maxYVelocity);
+        this.velocity = new Velocity(maxXVelocity);
         
         this.horizontalSpeed = horizontalSpeed;
         this.jumpHeight = jumpHeight;
@@ -62,7 +62,6 @@ class Moves{
         if(!this.moveConstraints.getCanMoveDown()){ // on solid surface
             this.canJump = true;
         }
-
 
         this.velocity.update(
             this.moveConstraints.getCanMoveRight(),

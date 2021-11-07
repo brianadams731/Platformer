@@ -7,11 +7,11 @@ class Velocity{
     private friction:number;
     private gravity:number;
 
-    constructor(maxXVelocity:number, maxYVelocity:number){
+    constructor(maxXVelocity:number){
         this.xVelocity = 0;
         this.yVelocity = 0;
         this.maxXVelocity = maxXVelocity;
-        this.maxYVelocity = maxYVelocity;
+        this.maxYVelocity = 16;
 
         this.friction = .6;
         this.gravity = 1.5;
@@ -31,9 +31,10 @@ class Velocity{
     public addToYVelocity(addToY:number){
         const changedYVelocity = this.yVelocity + addToY;
         if(changedYVelocity>0){
-            this.yVelocity = Math.min(changedYVelocity, this.yVelocity);
+            this.yVelocity = Math.min(changedYVelocity, this.maxYVelocity);
         }else if(changedYVelocity<0){
-            this.yVelocity = Math.max(changedYVelocity, -this.maxYVelocity);
+           //this.yVelocity = Math.max(changedYVelocity, -this.maxYVelocity*1.5);
+           this.yVelocity = changedYVelocity; // REMOVE THE CAP ON MAX JUMP VELOCITY
         }else{
             this.yVelocity = 0;
         }
@@ -57,7 +58,7 @@ class Velocity{
             this.xVelocity = Math.min(this.xVelocity+this.friction,0)
         }
     
-        this.yVelocity += this.gravity;
+        this.addToYVelocity(this.gravity);
         
         if(!canMoveRight){
             this.xVelocity = Math.min(this.xVelocity,0);
