@@ -36,6 +36,11 @@ class Moves{
         }
     }
 
+    public jumpSpring(){
+        this.velocity.jumpYVelocity(this.jumpHeight*1.4);
+        this.canJump = false;
+    }
+
     public isOnSurface(isOnSurface:boolean){
         this.moveConstraints.setCanMoveDown(!isOnSurface);
     }

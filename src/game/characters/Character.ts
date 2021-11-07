@@ -71,6 +71,9 @@ abstract class Character implements GivesCollisionData, Collidable{
             if(this.collisionArray[i].collider.collisionProperties.includes("solid")){
                 this.collisionWithSolid(this.collisionArray[i]);
             }
+            if(this.collisionArray[i].collider.collisionProperties.includes("spring")){
+                this.moves.jumpSpring()
+            }
             // Splice out the collision
             this.collisionArray.splice(i, 1);
         }
