@@ -7,6 +7,7 @@ class DirtGround extends StaticForeground{
         super(x,y,
             new PIXI.Sprite(PIXI.Texture.WHITE)
         );
+        this.foreground.tint = 0x86DC3D
         this.collisionProperties = ["solid"]
         // test
         this.foreground.height = 16;

@@ -22,7 +22,13 @@ class ForegroundController {
     }
 
     draw(app:PIXI.Application):void{
+        const leftBound = app.stage.pivot.x - app.renderer.width;
+        const rightBound = app.stage.pivot.x + app.renderer.width;
+
         for(let i=0; i<this.foregrounds.length; i++){
+            if(this.foregrounds[i].getCollisionData().x < leftBound || this.foregrounds[i].getCollisionData().x > rightBound){ // CULLING ALL ALL FOREGROUND OFF SCREEN
+                continue
+            }
             this.foregrounds[i].draw(app);
         }
     }
@@ -44,7 +50,7 @@ class ForegroundController {
         for(let i=0;i<12;i++){
             this.foregrounds.push(new DirtGround(500+i*16,450))
         }
-        for(let i=0;i<12;i++){
+        for(let i=0;i<100;i++){
             this.foregrounds.push(new DirtGround(650+i*16,350))
         }
 

@@ -6,6 +6,7 @@ class Spring extends StaticForeground{
         super(x,y,
             new PIXI.Sprite(PIXI.Texture.WHITE)
         )
+        this.foreground.tint = 0x006ee6;
         this.collisionProperties = ["spring"]
         // TEST
         this.foreground.height = 16;
