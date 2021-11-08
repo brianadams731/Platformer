@@ -66,13 +66,13 @@ export function checkCollision(self:collisionData,other:collisionData):collision
     return collisionObj;
 }
 
-export function invertCollisionObj(self:collision){     // Generates the other collision object from the one generated for self, prevents recalculating collision
+export function invertCollisionObj(self:collision, colliderData:collisionData):collision{     // Generates the other collision object from the one generated for self, prevents recalculating collision
     return({
         collided:self.collided,
         topCollided:self.bottomCollided,
         bottomCollided:self.topCollided,
         leftCollided:self.rightCollided,
         rightCollided:self.leftCollided,
-        collider:self
+        collider:colliderData
     })
 }

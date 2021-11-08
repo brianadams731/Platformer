@@ -2,8 +2,9 @@ import * as PIXI from "pixi.js";
 //import {AnimatedEntity} from "../AnimatedEntity";
 import {Moves} from "./Moves";
 import {Collidable,collision, GivesCollisionData, collisionData} from "../interfaces/collisions";
+import { Removable } from "../interfaces/gameObjects";
 
-abstract class Character implements GivesCollisionData, Collidable{
+abstract class Character implements GivesCollisionData, Collidable, Removable{
     //private character:AnimatedEntity;
     private moves:Moves;
     private x:number;
@@ -11,6 +12,8 @@ abstract class Character implements GivesCollisionData, Collidable{
 
     private height:number;
     private width: number;
+
+    private shouldRemove;
 
     private collisionArray: collision[];
     private collisionProperties: string[];
@@ -23,6 +26,8 @@ abstract class Character implements GivesCollisionData, Collidable{
 
         this.height = 32;
         this.width = 32;
+
+        this.shouldRemove = false;
 
         this.collisionArray = [];
         this.collisionProperties = [];
@@ -42,9 +47,13 @@ abstract class Character implements GivesCollisionData, Collidable{
 
     public draw(app:PIXI.Application){
 
-        //this.character.draw(app);
+        //app.stage.addChild(this.character);
     }
 
+    public removeFromStage(app: PIXI.Application): void {
+        //app.stage.removeChild(this.character);
+    }
+    
     public moveRight(){
         this.moves.moveRight();
     }
@@ -62,6 +71,10 @@ abstract class Character implements GivesCollisionData, Collidable{
         return this.y;
     }
 
+    public getShouldRemove(): boolean {
+        return this.shouldRemove;
+    }
+    
     public resetMovement(){
         this.moves.resetMoveConstraints();
     }

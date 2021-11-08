@@ -7,12 +7,12 @@ class Ghost extends Character{
     constructor(){
         super(250,250,10,1,23);
         this.setCollisionProperties(["player","solid"]);
+        
         // TODO TEST DELETE
         this.square = new PIXI.Sprite(PIXI.Texture.WHITE);
         this.square.height = this.getCollisionData().height;
         this.square.width = this.getCollisionData().width;
         // END TEST DELETE
-
     }
 
     // TODO TEST DELETE
