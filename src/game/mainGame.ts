@@ -29,6 +29,7 @@ function mainGame(spriteManagerOut: SpriteManager){
     }
     const eagerDraw = function(app:PIXI.Application){
         player.draw(app);
+        foregroundController.draw(app);
     }
 
     const collisionChecker = function(player:Controller){
@@ -40,9 +41,9 @@ function mainGame(spriteManagerOut: SpriteManager){
                     foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
                 }
 
-                /*if(foregroundController.getForeground()[i].getCollisionData().collisionProperties.includes("spring")){
+                if(foregroundController.getForeground()[i].getCollisionData().collisionProperties.includes("spring")){
                     foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
-                }*/
+                }
             }    
         }
     }

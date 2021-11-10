@@ -69,7 +69,7 @@ class ForegroundController {
             this.foregrounds.push(new DirtGround(650+i*16*2,350, spriteManager))
         }
 
-        this.foregrounds.push(new Spring(650+32,350-16*2, spriteManager))
+        this.foregrounds.push(new Spring(650+32,350-16*2 - 1, spriteManager))
     }
 }
 

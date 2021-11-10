@@ -25,6 +25,7 @@ abstract class StaticForeground extends Foreground{
         app.stage.addChild(this.foreground);
     }
 
+
     removeFromStage(app:PIXI.Application):void{
         app.stage.removeChild(this.foreground);
     }
