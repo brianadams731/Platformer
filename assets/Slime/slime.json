@@ -1,0 +1,104 @@
+{"frames": {
+
+"slime-death-0.png":
+{
+	"frame": {"x":1,"y":46,"w":14,"h":13},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":3,"w":14,"h":13},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-death-1.png":
+{
+	"frame": {"x":1,"y":61,"w":13,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":13,"h":7},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-death-2.png":
+{
+	"frame": {"x":19,"y":37,"w":12,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":12,"h":7},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-death-3.png":
+{
+	"frame": {"x":16,"y":68,"w":12,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":12,"h":7},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-death-4.png":
+{
+	"frame": {"x":17,"y":46,"w":14,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":14,"h":9},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-death-5.png":
+{
+	"frame": {"x":17,"y":57,"w":14,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":14,"h":9},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-idel-0.png":
+{
+	"frame": {"x":1,"y":1,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":3,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-idel-1.png":
+{
+	"frame": {"x":1,"y":16,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":3,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-idel-2.png":
+{
+	"frame": {"x":1,"y":31,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":3,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-idel-3.png":
+{
+	"frame": {"x":19,"y":1,"w":16,"h":12},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":16}
+},
+"slime-idel-4.png":
+{
+	"frame": {"x":19,"y":19,"w":16,"h":12},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":16}
+}},
+"animations": {
+	"slime-death": ["slime-death-0.png","slime-death-1.png","slime-death-2.png","slime-death-3.png","slime-death-4.png","slime-death-5.png"],
+	"slime-idel": ["slime-idel-0.png","slime-idel-1.png","slime-idel-2.png","slime-idel-3.png","slime-idel-4.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "slime.png",
+	"format": "RGBA8888",
+	"size": {"w":32,"h":76},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:641b70c217c254e952ed8e0b0820760f:c7b4be52797730ffbfd08fb0993ec15a:5969a7bd39dc609f49b3bb3f3e71107a$"
+}
+}

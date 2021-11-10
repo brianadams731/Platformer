@@ -1,6 +1,7 @@
-class GameConstants{
-    static readonly GAME_HEIGHT: 500;
-    static readonly GAME_WIDTH: 500;
-    static readonly GRAVETY: 10;
-    private constructor(){}
+const GameConstants = {
+    GRAVITY: 10,
+    foregroundScale:2,
+    playerScale:2,
 }
+
+export {GameConstants};

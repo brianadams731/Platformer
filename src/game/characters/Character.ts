@@ -5,32 +5,35 @@ import {Collidable,collision, GivesCollisionData, collisionData} from "../interf
 import { Removable } from "../interfaces/gameObjects";
 
 abstract class Character implements GivesCollisionData, Collidable, Removable{
-    //private character:AnimatedEntity;
+    protected spriteSheet:PIXI.Spritesheet
+    protected character:PIXI.AnimatedSprite;
+
     private moves:Moves;
     private x:number;
     private y:number;
 
-    private height:number;
-    private width: number;
 
     private shouldRemove;
 
     private collisionArray: collision[];
     private collisionProperties: string[];
 
-    constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number){
+    constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number, spritesheet:PIXI.Spritesheet, animatedSprite:PIXI.AnimatedSprite){
         //this.character = new AnimatedEntity(0,0);
         this.moves = new Moves(maxXVelocity,speed, jumpHeight)
         this.x = x;
         this.y = y;
 
-        this.height = 32;
-        this.width = 32;
 
         this.shouldRemove = false;
 
         this.collisionArray = [];
         this.collisionProperties = [];
+
+        this.spriteSheet = spritesheet;
+        this.character = animatedSprite;
+
+        this.character.play();
     }
 
 
@@ -41,24 +44,25 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
 
         this.x = this.moves.updateX(this.x);
         this.y = this.moves.updateY(this.y);
-        //this.character.setX(this.x);
-        //this.character.setY(this.y);
+        this.character.x  = this.x;
+        this.character.y = this.y;
     }
 
     public draw(app:PIXI.Application){
-
-        //app.stage.addChild(this.character);
+        app.stage.addChild(this.character)
     }
 
     public removeFromStage(app: PIXI.Application): void {
-        //app.stage.removeChild(this.character);
+       app.stage.removeChild(this.character)
     }
     
     public moveRight(){
         this.moves.moveRight();
+        //this.character.scale.x = this.moves.isXVelocityPositive()?1:-1;
     }
     public moveLeft(){
         this.moves.moveLeft();
+        //this.character.scale.x = this.moves.isXVelocityPositive()?1:-1;
     }
     public jump(){
         this.moves.jump();
@@ -97,7 +101,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.moves.collisionWithSolid(collisionObj);
         
         if(collisionObj.bottomCollided){
-            this.y = collisionObj.collider.y - this.height;
+            this.y = collisionObj.collider.y - this.character.height;
         }
         if(collisionObj.topCollided){
             this.y = collisionObj.collider.y + collisionObj.collider.height;
@@ -106,7 +110,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
             this.x = collisionObj.collider.x + collisionObj.collider.width ;
         }
         if(collisionObj.rightCollided){
-            this.x = collisionObj.collider.x - this.width;
+            this.x = collisionObj.collider.x - this.character.width;
         }
     }
 
@@ -118,8 +122,8 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         return {
             x:this.x,
             y:this.y,
-            height:this.height,  // this.character.getHeight() TODO SWITCH TO CHAR DIMENSIONS 
-            width:this.width,    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
+            height:this.character.height,  // this.character.getHeight() TODO SWITCH TO CHAR DIMENSIONS 
+            width:this.character.width,    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
             collisionProperties:this.collisionProperties,
         }
     }
@@ -127,6 +131,10 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.collisionProperties = collisionProperties;
     }
 
+    protected abstract setRunningAnimation():void;
+    protected abstract setJumpingAnimation():void;
+    protected abstract setFallingAnimation():void;
+    protected abstract setDeathAnimation():void;
 }
 
 export {Character};

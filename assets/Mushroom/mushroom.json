@@ -1,0 +1,177 @@
+{"frames": {
+
+"mushroom-death-0.png":
+{
+	"frame": {"x":1,"y":1,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-death-1.png":
+{
+	"frame": {"x":55,"y":27,"w":14,"h":6},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":6},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-death-2.png":
+{
+	"frame": {"x":55,"y":43,"w":9,"h":6},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":9,"h":6},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-death-3.png":
+{
+	"frame": {"x":55,"y":54,"w":9,"h":6},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":9,"h":6},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-death-4.png":
+{
+	"frame": {"x":55,"y":1,"w":11,"h":7},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":11,"h":7},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-death-5.png":
+{
+	"frame": {"x":55,"y":14,"w":11,"h":7},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":11,"h":7},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-0.png":
+{
+	"frame": {"x":19,"y":53,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":3,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-1.png":
+{
+	"frame": {"x":37,"y":53,"w":16,"h":12},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-2.png":
+{
+	"frame": {"x":19,"y":68,"w":16,"h":10},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":6,"w":16,"h":10},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-3.png":
+{
+	"frame": {"x":1,"y":69,"w":16,"h":10},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":6,"w":16,"h":10},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-4.png":
+{
+	"frame": {"x":37,"y":67,"w":16,"h":12},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-idel-5.png":
+{
+	"frame": {"x":1,"y":37,"w":16,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":16,"h":14},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-0.png":
+{
+	"frame": {"x":19,"y":1,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-1.png":
+{
+	"frame": {"x":37,"y":1,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-2.png":
+{
+	"frame": {"x":19,"y":37,"w":14,"h":16},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":14,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-3.png":
+{
+	"frame": {"x":37,"y":19,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-4.png":
+{
+	"frame": {"x":1,"y":19,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-5.png":
+{
+	"frame": {"x":19,"y":19,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-6.png":
+{
+	"frame": {"x":1,"y":53,"w":14,"h":16},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":14,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"mushroom-run-7.png":
+{
+	"frame": {"x":37,"y":36,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+}},
+"animations": {
+	"mushroom-death": ["mushroom-death-0.png","mushroom-death-1.png","mushroom-death-2.png","mushroom-death-3.png","mushroom-death-4.png","mushroom-death-5.png"],
+	"mushroom-idel": ["mushroom-idel-0.png","mushroom-idel-1.png","mushroom-idel-2.png","mushroom-idel-3.png","mushroom-idel-4.png","mushroom-idel-5.png"],
+	"mushroom-run": ["mushroom-run-0.png","mushroom-run-1.png","mushroom-run-2.png","mushroom-run-3.png","mushroom-run-4.png","mushroom-run-5.png","mushroom-run-6.png","mushroom-run-7.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "mushroom.png",
+	"format": "RGBA8888",
+	"size": {"w":63,"h":80},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:41e0bb7c1059d53e58ffca3d1d2b8e37:97528fd409d3965f5847ba59e24f18ef:8a544df6aef50d18a11cb4d452e86c67$"
+}
+}

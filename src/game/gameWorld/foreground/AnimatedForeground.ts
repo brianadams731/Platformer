@@ -3,9 +3,10 @@ import * as PIXI from "pixi.js";
 import {collisionData} from "../../interfaces/collisions";
 
 abstract class AnimatedForeground extends Foreground{
-    
-    constructor(x:number,y:number){
+    spriteSheet:PIXI.Spritesheet;
+    constructor(x:number,y:number, spriteSheet:PIXI.Spritesheet){
         super(x,y);
+        this.spriteSheet = spriteSheet;
     }
 
     update():void{

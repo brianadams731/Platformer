@@ -1,13 +1,14 @@
 import * as PIXI from "pixi.js";
+import { SpriteManager } from "../../SpriteManager";
 import { StaticForeground } from "./StaticForeground";
 
 class Coin extends StaticForeground{
-    constructor(x:number,y:number){
+    constructor(x:number,y:number, spritesheetManager:SpriteManager){
         super(x,y,
-            new PIXI.Sprite(PIXI.Texture.WHITE)
+            new PIXI.Sprite(spritesheetManager.getCoin().textures["coin-0.png"]),
         )
-        this.collisionProperties = ["coin"]
 
+        this.collisionProperties = ["coin"]
         this.foreground.tint = 0xFFFF00;
     }
     

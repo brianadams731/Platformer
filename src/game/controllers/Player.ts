@@ -3,12 +3,13 @@ import { Ghost } from "../characters/Ghost";
 import { InputController } from "./InputController";
 
 import {Collidable} from "../interfaces/collisions";
+import { SpriteManager } from "../SpriteManager";
 
 class Player extends Controller implements Collidable{
     inputController: InputController;
-    constructor(){
+    constructor(spriteManager:SpriteManager){
         super(
-            new Ghost()
+            new Ghost(spriteManager)
         )
         this.inputController = new InputController();
     }

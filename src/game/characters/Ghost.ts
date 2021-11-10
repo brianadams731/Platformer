@@ -1,25 +1,28 @@
 import * as PIXI from "pixi.js";
+import { SpriteManager } from "../SpriteManager";
+import { GameConstants } from "../GameConstants";
 import { Character } from "./Character";
 
 class Ghost extends Character{
-    square :PIXI.Sprite;
-
-    constructor(){
-        super(250,250,10,1,23);
+    constructor(spriteManager:SpriteManager){
+        super(250,250,10,1,23,spriteManager.getGhost(), new PIXI.AnimatedSprite(spriteManager.getGhost().animations["ghost-idel"]))
         this.setCollisionProperties(["player","solid"]);
-        
-        // TODO TEST DELETE
-        this.square = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.square.height = this.getCollisionData().height;
-        this.square.width = this.getCollisionData().width;
-        // END TEST DELETE
+        this.character.animationSpeed = .08
+        this.character.scale.x = GameConstants.playerScale;
+        this.character.scale.y = GameConstants.playerScale;
     }
 
-    // TODO TEST DELETE
-    draw(app:PIXI.Application){
-        this.square.x = this.getX();
-        this.square.y = this.getY();
-        app.stage.addChild(this.square);
+    protected setRunningAnimation():void{
+
+    }
+    protected setJumpingAnimation():void{
+
+    }
+    protected setFallingAnimation():void{
+
+    }
+    protected setDeathAnimation():void{
+
     }
 }
 

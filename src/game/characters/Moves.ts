@@ -60,7 +60,11 @@ class Moves{
     public resetMoveConstraints(){
         this.moveConstraints.reset();
     }
-    
+
+    public isXVelocityPositive(){
+        return this.velocity.getXVelocity()>=0;
+    }
+
     public update(){
         
 

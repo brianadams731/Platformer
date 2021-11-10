@@ -1,14 +1,13 @@
 import * as PIXI from "pixi.js";
+import { SpriteManager } from "../../SpriteManager";
 import { StaticForeground } from "./StaticForeground";
 
 class Spring extends StaticForeground{
-    constructor(x:number,y:number){
+    constructor(x:number,y:number, spritesheetManager:SpriteManager){
         super(x,y,
-            new PIXI.Sprite(PIXI.Texture.WHITE)
+            new PIXI.Sprite(spritesheetManager.getSlime().textures["slime-idel-0.png"])
         )
         this.collisionProperties = ["spring"]
-
-        this.foreground.tint = 0x006ee6;
     }
 }
 

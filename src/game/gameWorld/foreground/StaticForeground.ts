@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import { collisionData } from "../../interfaces/collisions";
+import { GameConstants } from "../../GameConstants";
 import {Foreground} from "./Foreground";
 
 abstract class StaticForeground extends Foreground{
@@ -8,10 +9,10 @@ abstract class StaticForeground extends Foreground{
     constructor(x:number,y:number, sprite: PIXI.Sprite){
         super(x,y);
         this.foreground = sprite;
+        this.foreground.scale.x = GameConstants.foregroundScale;
+        this.foreground.scale.y = GameConstants.foregroundScale;
         this.foreground.x = this.x;
         this.foreground.y = this.y;
-        this.foreground.height = 32;
-        this.foreground.width = 32;
     }
 
     // Override Foreground
@@ -23,6 +24,7 @@ abstract class StaticForeground extends Foreground{
     draw(app:PIXI.Application):void{
         app.stage.addChild(this.foreground);
     }
+
     removeFromStage(app:PIXI.Application):void{
         app.stage.removeChild(this.foreground);
     }

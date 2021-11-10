@@ -23,7 +23,7 @@ export function checkCollision(self:collisionData,other:collisionData):collision
     // TODO CITE FROM https://gamedev.stackexchange.com/questions/29786/a-simple-2d-rectangle-collision-algorithm-that-also-determines-which-sides-that
     if (Math.abs(dx) <= w && Math.abs(dy) <= h){
         collisionObj.collided = true;
-        const wy = w * dy * 2;
+        const wy = w * dy * 1.5;
         const hx = h * dx;
         if (wy > hx){
             if (wy > -hx){
@@ -45,24 +45,6 @@ export function checkCollision(self:collisionData,other:collisionData):collision
             }           
         }
     }
-    /*
-    // TODO Cite this if statement, comes from MDN 2D Collision
-    if(self.x < other.x + other.width && self.x + self.width > other.x && self.y < other.y + other.height && self.height + self.y > other.y){
-        collisionObj.collided = true;
-
-        if(self.y + self.height > other.y && self.y < other.y){
-            collisionObj.bottomCollided = true;
-        }
-        if(self.y < other.y + other.height && self.y + self.height > other.y + other.height){
-            collisionObj.topCollided = true;
-        }
-        if(self.x + self.width > other.x && self.x + self.width > other.x + other.width){
-            collisionObj.rightCollided = true;
-        }
-        if(self.x < other.x + other.width && self.x < other.x){
-            collisionObj.leftCollided = true;
-        }
-    }*/
     return collisionObj;
 }
 

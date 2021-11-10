@@ -4,19 +4,21 @@ import { checkCollision, invertCollisionObj} from "./utils/collider";
 import { gameInit } from "./utils/gameInit";
 import { Player } from "./controllers/Player";
 import { ForegroundController } from "./gameWorld/controllers/ForegroundController";
+import {SpriteManager} from "./SpriteManager";
 
-function mainGame(){
-    PIXI.utils.skipHello();
+function mainGame(spriteManagerOut: SpriteManager){
     const app = new PIXI.Application({
         antialias:false,
         height:window.innerHeight,
-        width:window.innerWidth
+        width:window.innerWidth,
+        backgroundColor:0x34202b
     });
     gameInit(app);
 
     // GAME OBJECTS INIT
-    const player = new Player() as Controller;
-    const foregroundController = new ForegroundController();
+    const spriteManager =  spriteManagerOut;
+    const player = new Player(spriteManager) as Controller;
+    const foregroundController = new ForegroundController(spriteManager);
 
     const update = function(app:PIXI.Application){
         player.update();

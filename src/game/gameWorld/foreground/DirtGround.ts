@@ -1,15 +1,14 @@
 import { StaticForeground } from "./StaticForeground";
 import * as PIXI from "pixi.js";
+import { SpriteManager } from "../../SpriteManager";
 
 class DirtGround extends StaticForeground{
     
-    constructor(x:number, y:number){
+    constructor(x:number, y:number, spritesheetManager:SpriteManager){
         super(x,y,
-            new PIXI.Sprite(PIXI.Texture.WHITE)
+            new PIXI.Sprite(spritesheetManager.getCave().textures["cave-2.png"]),
         );
         this.collisionProperties = ["solid"]
-
-        this.foreground.tint = 0x86DC3D
     }
 
 }
