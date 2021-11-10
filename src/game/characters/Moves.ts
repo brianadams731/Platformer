@@ -65,6 +65,13 @@ class Moves{
         return this.velocity.getXVelocity()>=0;
     }
 
+    public getXVelocity():number{
+        return this.velocity.getXVelocity();
+    }
+    public getYVelocity():number{
+        return this.velocity.getYVelocity();
+    }
+    
     public update(){
         
 

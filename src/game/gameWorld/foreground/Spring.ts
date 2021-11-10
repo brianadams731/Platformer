@@ -1,14 +1,26 @@
 import * as PIXI from "pixi.js";
 import { SpriteManager } from "../../SpriteManager";
-import { StaticForeground } from "./StaticForeground";
+import {AnimatedForeground} from "./AnimatedForeground";
 
-class Spring extends StaticForeground{
+class Spring extends AnimatedForeground{
     constructor(x:number,y:number, spritesheetManager:SpriteManager){
         super(x,y,
-            new PIXI.Sprite(spritesheetManager.getSlime().textures["slime-idel-0.png"])
+            spritesheetManager.getSlime(),
+            new PIXI.AnimatedSprite(spritesheetManager.getSlime().animations["slime-idel"])
         )
         this.collisionProperties = ["spring"]
+        this.foreground.play();
+        this.foreground.animationSpeed = .12;
     }
+
+    /*update(): void {
+        super.update();
+        for(let i = 0; i<this.collisionArray.length;i++){
+            if(this.collisionArray[i].collider.collisionProperties.includes("player")){
+                this.flagToRemove();
+            }
+        }
+    }*/  
 }
 
 export {Spring};

@@ -39,6 +39,10 @@ function mainGame(spriteManagerOut: SpriteManager){
                 if(foregroundController.getForeground()[i].getCollisionData().collisionProperties.includes("coin")){
                     foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
                 }
+
+                /*if(foregroundController.getForeground()[i].getCollisionData().collisionProperties.includes("spring")){
+                    foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
+                }*/
             }    
         }
     }

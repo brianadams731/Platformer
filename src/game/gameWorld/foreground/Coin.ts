@@ -1,15 +1,16 @@
 import * as PIXI from "pixi.js";
 import { SpriteManager } from "../../SpriteManager";
-import { StaticForeground } from "./StaticForeground";
+import {AnimatedForeground} from "./AnimatedForeground";
 
-class Coin extends StaticForeground{
+class Coin extends AnimatedForeground{
     constructor(x:number,y:number, spritesheetManager:SpriteManager){
         super(x,y,
-            new PIXI.Sprite(spritesheetManager.getCoin().textures["coin-0.png"]),
+            spritesheetManager.getCoin(),
+            new PIXI.AnimatedSprite(spritesheetManager.getCoin().animations["coin"]),
         )
-
+        this.foreground.play();
         this.collisionProperties = ["coin"]
-        this.foreground.tint = 0xFFFF00;
+        this.foreground.animationSpeed = .12;
     }
     
     update(): void {

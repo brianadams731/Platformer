@@ -3,12 +3,13 @@ import * as PIXI from "pixi.js";
 import {Moves} from "./Moves";
 import {Collidable,collision, GivesCollisionData, collisionData} from "../interfaces/collisions";
 import { Removable } from "../interfaces/gameObjects";
+import { AnimationManager } from "./AnimationManager";
 
 abstract class Character implements GivesCollisionData, Collidable, Removable{
-    protected spriteSheet:PIXI.Spritesheet
     protected character:PIXI.AnimatedSprite;
+    protected animationManager:AnimationManager;
 
-    private moves:Moves;
+    protected moves:Moves;
     private x:number;
     private y:number;
 
@@ -18,8 +19,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
     private collisionArray: collision[];
     private collisionProperties: string[];
 
-    constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number, spritesheet:PIXI.Spritesheet, animatedSprite:PIXI.AnimatedSprite){
-        //this.character = new AnimatedEntity(0,0);
+    constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number, animationManager:AnimationManager){
         this.moves = new Moves(maxXVelocity,speed, jumpHeight)
         this.x = x;
         this.y = y;
@@ -30,10 +30,12 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.collisionArray = [];
         this.collisionProperties = [];
 
-        this.spriteSheet = spritesheet;
-        this.character = animatedSprite;
-
+        this.animationManager = animationManager;
+        this.character = this.animationManager.initCharacter();
+        this.character.scale.x = 2;
+        this.character.scale.y = 2;
         this.character.play();
+        this.character.animationSpeed = .16;
     }
 
 
@@ -44,12 +46,18 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
 
         this.x = this.moves.updateX(this.x);
         this.y = this.moves.updateY(this.y);
-        this.character.x  = this.x;
+
+        this.character.x = this.x;
         this.character.y = this.y;
+
+        this.animationManager.update(this.moves);
+        this.animationManager.character.x = this.x;
+        this.animationManager.character.y = this.y;
     }
 
     public draw(app:PIXI.Application){
-        app.stage.addChild(this.character)
+        app.stage.addChild(this.animationManager.character)
+        //app.stage.addChild(this.character) // TODO CONVERT COLLISION TO WORK OFF ANIMATION MANAGER!!!
     }
 
     public removeFromStage(app: PIXI.Application): void {
@@ -58,12 +66,13 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
     
     public moveRight(){
         this.moves.moveRight();
-        //this.character.scale.x = this.moves.isXVelocityPositive()?1:-1;
+
     }
+    
     public moveLeft(){
         this.moves.moveLeft();
-        //this.character.scale.x = this.moves.isXVelocityPositive()?1:-1;
     }
+
     public jump(){
         this.moves.jump();
     }
@@ -120,8 +129,8 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
 
     public getCollisionData():collisionData{
         return {
-            x:this.x,
-            y:this.y,
+            x:this.character.x,
+            y:this.character.y,
             height:this.character.height,  // this.character.getHeight() TODO SWITCH TO CHAR DIMENSIONS 
             width:this.character.width,    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
             collisionProperties:this.collisionProperties,
@@ -131,10 +140,6 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.collisionProperties = collisionProperties;
     }
 
-    protected abstract setRunningAnimation():void;
-    protected abstract setJumpingAnimation():void;
-    protected abstract setFallingAnimation():void;
-    protected abstract setDeathAnimation():void;
 }
 
 export {Character};
