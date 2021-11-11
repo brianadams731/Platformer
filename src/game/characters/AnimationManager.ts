@@ -49,6 +49,8 @@ class AnimationManager{
 
         this.position();
         
+        console.log(`height: ${this.character.height}`)
+        console.log(`width: ${this.character.width}`)
     }
 
     position(){
