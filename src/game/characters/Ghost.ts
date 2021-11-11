@@ -1,6 +1,7 @@
 import { SpriteManager } from "../SpriteManager";
 import { Character } from "./Character";
 import { AnimationManager } from "./AnimationManager";
+//import {collisionData} from "../interfaces/collisions"
 
 class Ghost extends Character{
     constructor(spriteManager:SpriteManager){
@@ -8,6 +9,16 @@ class Ghost extends Character{
         )
         this.setCollisionProperties(["player","solid"]);
     }
+
+    /*public getCollisionData():collisionData{
+        return {
+            x:this.character.x,
+            y:this.character.y,
+            height:this.character.height,  // this.character.getHeight() TODO SWITCH TO CHAR DIMENSIONS 
+            width:this.character.width,    // this.character.getWidth() TODO SWITCH TO CHAR DIMENSIONS
+            collisionProperties:this.collisionProperties,
+        }
+    }*/
 }
 
 export {Ghost};

@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";    // RIP treeshaking, this is how the docs suggest to import
 import { Controller } from "./controllers/Controller";
 import { checkCollision, invertCollisionObj} from "./utils/collider";
+import { lazyUpdateCameraY, updateCameraX } from "./utils/camera";
 import { gameInit } from "./utils/gameInit";
 import { Player } from "./controllers/Player";
 import { ForegroundController } from "./gameWorld/controllers/ForegroundController";
@@ -25,8 +26,10 @@ function mainGame(spriteManagerOut: SpriteManager){
         foregroundController.update(app);
     }
     const lazyDraw = function(app:PIXI.Application){
-        foregroundController.draw(app);
+        // TODO break apart the static forground, and include what doesnt need to be rerendered in here!!!
+        //foregroundController.draw(app);
     }
+
     const eagerDraw = function(app:PIXI.Application){
         player.draw(app);
         foregroundController.draw(app);
@@ -50,8 +53,8 @@ function mainGame(spriteManagerOut: SpriteManager){
 
     lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders, check to make sure this works with animations!!!
     app.ticker.add(()=>{
-        app.stage.pivot.x = player.getCollisionData().x + player.getCollisionData().width/2;
-        //app.stage.pivot.y = player.getCollisionData().y + player.getCollisionData().height/2;
+        app.stage.pivot.x = updateCameraX(player);
+        app.stage.pivot.y = lazyUpdateCameraY(player,app.stage.pivot.y)
         collisionChecker(player);
         update(app);
         eagerDraw(app); // Everything that needs to be redrawn every render goes here

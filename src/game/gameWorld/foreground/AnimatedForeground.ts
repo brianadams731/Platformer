@@ -1,4 +1,4 @@
-import { Foreground } from "./foreground";
+import { Foreground } from "./Foreground";
 import * as PIXI from "pixi.js";
 import {collisionData} from "../../interfaces/collisions";
 import {GameConstants} from "../../GameConstants";

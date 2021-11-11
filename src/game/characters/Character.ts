@@ -17,7 +17,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
     private shouldRemove;
 
     private collisionArray: collision[];
-    private collisionProperties: string[];
+    protected collisionProperties: string[];
 
     constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number, animationManager:AnimationManager){
         this.moves = new Moves(maxXVelocity,speed, jumpHeight)
@@ -139,7 +139,6 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
     protected setCollisionProperties(collisionProperties: string[]){
         this.collisionProperties = collisionProperties;
     }
-
 }
 
 export {Character};
