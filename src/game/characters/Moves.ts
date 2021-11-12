@@ -29,6 +29,13 @@ class Moves{
         this.velocity.addToXVelocity(-this.horizontalSpeed);
     }
 
+    public pushBack(){
+        this.velocity.addToXVelocity(-100)
+    }
+    public pushFoward(){
+        this.velocity.addToXVelocity(100)
+    }
+
     public jump(){
         if(this.canJump){
             this.velocity.jumpYVelocity(this.jumpHeight);

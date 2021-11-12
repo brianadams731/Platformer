@@ -7,9 +7,9 @@ import { SpriteManager } from "../SpriteManager";
 
 class Player extends Controller implements Collidable{
     inputController: InputController;
-    constructor(spriteManager:SpriteManager){
+    constructor(spriteManager:SpriteManager, x:number, y:number){
         super(
-            new Ghost(spriteManager)
+            new Ghost(spriteManager, x, y)
         )
         this.inputController = new InputController();
     }

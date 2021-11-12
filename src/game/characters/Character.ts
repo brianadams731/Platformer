@@ -4,19 +4,21 @@ import {Moves} from "./Moves";
 import {Collidable,collision, GivesCollisionData, collisionData} from "../interfaces/collisions";
 import { Removable } from "../interfaces/gameObjects";
 import { AnimationManager } from "./AnimationManager";
+import { Health } from "./Health";
 
 abstract class Character implements GivesCollisionData, Collidable, Removable{
     protected character:PIXI.AnimatedSprite;
     protected animationManager:AnimationManager;
-
     protected moves:Moves;
+    protected health:Health;
+
     private x:number;
     private y:number;
 
 
-    private shouldRemove;
+    private shouldRemove:boolean;
 
-    private collisionArray: collision[];
+    protected collisionArray: collision[];
     protected collisionProperties: string[];
 
     constructor(x:number, y:number, maxXVelocity:number, speed:number, jumpHeight:number, animationManager:AnimationManager){
@@ -31,15 +33,29 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.collisionProperties = [];
 
         this.animationManager = animationManager;
+
         this.character = this.animationManager.initCharacter();
         this.character.scale.x = 2;
         this.character.scale.y = 2;
         this.character.play();
         this.character.animationSpeed = .16;
+
+        this.health = new Health(1);
     }
 
 
     public update(){
+        if(this.health.getIsDead()){
+            this.collisionProperties = [];
+            this.animationManager.startDeathAnimation();
+            this.animationManager.character.x = this.x;
+            this.animationManager.character.y = this.y;
+            if(this.animationManager.getDeathAnimationCompleted()){
+                this.shouldRemove = true;
+            }
+            return;
+        }
+
         this.moves.resetMoveConstraints();
         this.resolveCollisions();
         this.moves.update();
@@ -68,14 +84,13 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.moves.moveRight();
 
     }
-    
     public moveLeft(){
         this.moves.moveLeft();
     }
-
     public jump(){
         this.moves.jump();
     }
+
 
     public getX():number{
         return this.x;
@@ -92,21 +107,10 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         this.moves.resetMoveConstraints();
     }
 
-    private resolveCollisions(){
-        for (let i = this.collisionArray.length - 1; i >= 0; i--) {
-            if(this.collisionArray[i].collider.collisionProperties.includes("solid")){
-                this.collisionWithSolid(this.collisionArray[i]);
-            }
-            if(this.collisionArray[i].collider.collisionProperties.includes("spring")){
-                this.moves.jumpSpring()
-            }
-            // Splice out the collision
-            this.collisionArray.splice(i, 1);
-        }
-    }
+    protected abstract resolveCollisions():void;
 
 
-    public collisionWithSolid(collisionObj:collision){
+    protected collisionWithSolid(collisionObj:collision){
         this.moves.collisionWithSolid(collisionObj);
         
         if(collisionObj.bottomCollided){
@@ -123,6 +127,31 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
         }
     }
 
+    protected collisionWithSpring():void{
+        this.moves.jumpSpring();
+    }
+
+    protected collisionWithPlayer(collisionObj:collision):void{
+        if(collisionObj.topCollided){
+            this.health.takeDamage();
+        }
+    }
+
+    protected collisionWithEnemy(collisionObj:collision):void{
+        console.log(collisionObj);
+        if(collisionObj.bottomCollided){
+            this.moves.jumpSpring()
+            return;
+        }
+
+        if(collisionObj.leftCollided){
+            this.moves.pushFoward();
+        }else if(collisionObj.rightCollided){
+            this.moves.pushBack();
+        }
+        this.health.takeDamage();
+    }
+
     public pushToColliderArray(collisionObj:collision):void{
         this.collisionArray.push(collisionObj);
     }
@@ -136,6 +165,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
             collisionProperties:this.collisionProperties,
         }
     }
+
     protected setCollisionProperties(collisionProperties: string[]){
         this.collisionProperties = collisionProperties;
     }

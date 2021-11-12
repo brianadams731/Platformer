@@ -11,7 +11,8 @@ class AnimationManager{
     private death:string;
     private currentAnimation:string;
     private facingRight:boolean
-    constructor(spritesheet:PIXI.Spritesheet,idle:string, run:string, jump:string, fall:string, death:string){
+    private deathAnimationComplete:boolean;
+    constructor(spritesheet:PIXI.Spritesheet,idle:string, run:string, jump:string, fall:string, death:string, x:number, y:number){
         this.spritesheet = spritesheet;
         this.idle = idle;
         this.run = run;
@@ -19,17 +20,20 @@ class AnimationManager{
         this.fall = fall;
         this.death = death;
         this.currentAnimation = "";
-
+        this.deathAnimationComplete = false;
         this.facingRight = true;
         this.character = new PIXI.AnimatedSprite(this.spritesheet.animations[this.idle]);
+        this.character.x = x;
+        this.character.y = y;
         this.animationDefault();
     }
 
+    // Recaftor out
     initCharacter(){
         return new PIXI.AnimatedSprite(this.spritesheet.animations[this.idle])
     }
 
-    update(moves:Moves){
+    public update(moves:Moves){
         if(moves.getYVelocity()<0){
             this.startJumpAnimation();
         }else if(moves.getYVelocity()>0){
@@ -48,12 +52,9 @@ class AnimationManager{
         }
 
         this.position();
-        
-        console.log(`height: ${this.character.height}`)
-        console.log(`width: ${this.character.width}`)
     }
 
-    position(){
+    private position(){
         if(this.facingRight){
             this.character.pivot.x = 0;
             this.character.scale.x = 2;
@@ -63,13 +64,13 @@ class AnimationManager{
         }
     }
 
-    animationDefault(){
+    private animationDefault(){
         this.character.animationSpeed = .1;
         this.character.play();
         this.character.scale.y = 2;
     }
     
-    startIdleAnimation(){
+    private startIdleAnimation(){
         if(this.currentAnimation === "idle"){
             return;
         }
@@ -81,7 +82,7 @@ class AnimationManager{
         
     }
 
-    startRunAnimation(){
+    private startRunAnimation(){
         if(this.currentAnimation === "run"){
             return;
         }
@@ -93,7 +94,7 @@ class AnimationManager{
         this.character.animationSpeed = .16
     }
 
-    startJumpAnimation(){
+    private startJumpAnimation(){
         if(this.currentAnimation === "jump"){
             return;
         }
@@ -105,7 +106,7 @@ class AnimationManager{
         this.character.loop = false;
     }
 
-    startFallAnimation(){
+    private startFallAnimation(){
         if(this.currentAnimation === "fall"){
             return;
         }
@@ -116,7 +117,7 @@ class AnimationManager{
         this.animationDefault();
     }
 
-    startDeathAnimation(){
+    public startDeathAnimation(){
         if(this.currentAnimation === "death"){
             return;
         }
@@ -125,7 +126,14 @@ class AnimationManager{
         this.character = new PIXI.AnimatedSprite(this.spritesheet.animations[this.death])
         this.position();
         this.animationDefault();
+        
         this.character.loop = false;
+        this.character.onComplete = ()=>{
+            this.deathAnimationComplete = true;
+        }
+    }
+    public getDeathAnimationCompleted():boolean{
+        return this.deathAnimationComplete;
     }
 }
 
