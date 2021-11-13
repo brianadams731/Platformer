@@ -53,6 +53,7 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
             if(this.animationManager.getDeathAnimationCompleted()){
                 this.shouldRemove = true;
             }
+            console.log(this.shouldRemove);
             return;
         }
 

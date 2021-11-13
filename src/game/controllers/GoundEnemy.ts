@@ -11,10 +11,17 @@ class GroundEnemy extends Controller implements Collidable{
     }
 
     public update(): void {
-        this.character.moveLeft();
+        
+        if(this.character instanceof Mushroom){
+            if(this.character.getShouldMoveLeft()){
+                this.character.moveLeft();
+            }else if(this.character.getShouldMoveRight()){
+                this.character.moveRight();
+            }
+        
+        }
         this.character.update()
     }
-    
 }
 
 export {GroundEnemy};

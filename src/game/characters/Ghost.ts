@@ -21,7 +21,6 @@ class Ghost extends Character{
     }*/
     public update(): void {
         super.update();
-        console.log(this.health.getHp());
     }
 
     protected resolveCollisions():void{
