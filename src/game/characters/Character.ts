@@ -2,11 +2,12 @@ import * as PIXI from "pixi.js";
 //import {AnimatedEntity} from "../AnimatedEntity";
 import {Moves} from "./Moves";
 import {Collidable,collision, GivesCollisionData, collisionData} from "../interfaces/collisions";
+import { GivesPostition, position } from "../interfaces/givesPosition";
 import { Removable } from "../interfaces/gameObjects";
 import { AnimationManager } from "./AnimationManager";
 import { Health } from "./Health";
 
-abstract class Character implements GivesCollisionData, Collidable, Removable{
+abstract class Character implements GivesCollisionData, GivesPostition, Collidable, Removable{
     protected character:PIXI.AnimatedSprite;
     protected animationManager:AnimationManager;
     protected moves:Moves;
@@ -169,6 +170,10 @@ abstract class Character implements GivesCollisionData, Collidable, Removable{
 
     protected setCollisionProperties(collisionProperties: string[]){
         this.collisionProperties = collisionProperties;
+    }
+
+    public getPosition():position{
+        return this.animationManager.getPosition();
     }
 }
 

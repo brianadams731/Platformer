@@ -6,7 +6,7 @@ import { gameInit } from "./utils/gameInit";
 import { Player } from "./controllers/Player";
 import { ForegroundController } from "./gameWorld/controllers/ForegroundController";
 import {SpriteManager} from "./SpriteManager";
-import { GroundEnemy } from "./controllers/GoundEnemy";
+import { PlayerFollower } from "./controllers/PlayerFollower";
 
 function mainGame(spriteManagerOut: SpriteManager){
     const app = new PIXI.Application({
@@ -22,18 +22,20 @@ function mainGame(spriteManagerOut: SpriteManager){
     const player = new Player(spriteManager, 250,250) as Controller;
     const foregroundController = new ForegroundController(spriteManager);
 
-    const testEnemy = new GroundEnemy(spriteManager,600,260) as Controller;
+    const testEnemy = new PlayerFollower(spriteManager,600,260);
 
     const update = function(app:PIXI.Application){
         player.update();
         foregroundController.update(app);
 
+        testEnemy.followPlayer(player.getPosition());
         testEnemy.update();
     }
-    const lazyDraw = function(app:PIXI.Application){
+    
+    /*const lazyDraw = function(app:PIXI.Application){
         // TODO break apart the static forground, and include what doesnt need to be rerendered in here!!!
         //foregroundController.draw(app);
-    }
+    }*/
 
     const eagerDraw = function(app:PIXI.Application){
         player.draw(app);
@@ -71,7 +73,7 @@ function mainGame(spriteManagerOut: SpriteManager){
 
     }
 
-    lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders, check to make sure this works with animations!!!
+    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders, check to make sure this works with animations!!!
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
         app.stage.pivot.y = lazyUpdateCameraY(player,app.stage.pivot.y)

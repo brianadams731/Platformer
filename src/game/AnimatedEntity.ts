@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 
-class AnimatedEntity{
+class AnimatedEntity{  // TODO CAN REMOVE
     private entity:PIXI.AnimatedSprite;
 
     constructor(x:number, y:number){

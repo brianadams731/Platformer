@@ -1,7 +1,8 @@
 import * as PIXI from "pixi.js";
+import { GivesPostition, position } from "../interfaces/givesPosition";
 import { Moves } from "./Moves";
 
-class AnimationManager{
+class AnimationManager implements GivesPostition{
     private spritesheet:PIXI.Spritesheet;
     public character:PIXI.AnimatedSprite;
     private idle:string;
@@ -134,6 +135,15 @@ class AnimationManager{
     }
     public getDeathAnimationCompleted():boolean{
         return this.deathAnimationComplete;
+    }
+
+    public getPosition():position{
+        return ({
+            x:this.character.x,
+            y:this.character.y,
+            width:this.character.width,
+            height:this.character.height
+        })
     }
 }
 
