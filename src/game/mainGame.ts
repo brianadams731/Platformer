@@ -19,10 +19,11 @@ function mainGame(spriteManagerOut: SpriteManager){
 
     // GAME OBJECTS INIT
     const spriteManager =  spriteManagerOut;
-    const player = new Player(spriteManager, 250,250) as Controller;
+    const player = new Player(spriteManager, 250,-100) as Controller;
+
     const foregroundController = new ForegroundController(spriteManager);
 
-    const testEnemy = new PlayerFollower(spriteManager,600,260);
+    const testEnemy = new PlayerFollower(spriteManager,600,0);
 
     const update = function(app:PIXI.Application){
         player.update();
@@ -80,6 +81,10 @@ function mainGame(spriteManagerOut: SpriteManager){
         update(app); // not setting x values in animationManager until update
         collisionChecker(player, testEnemy);
         eagerDraw(app); // Everything that needs to be redrawn every render goes here
+
+        if(player.getShouldRemove()){
+            console.log("dead")
+        }
     });
     
 }

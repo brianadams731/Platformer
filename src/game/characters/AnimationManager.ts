@@ -37,7 +37,7 @@ class AnimationManager implements GivesPostition{
     public update(moves:Moves){
         if(moves.getYVelocity()<0){
             this.startJumpAnimation();
-        }else if(moves.getYVelocity()>0){
+        }else if(moves.getYVelocity()>6){
             this.startFallAnimation();
         }else if(moves.getXVelocity()<0||moves.getXVelocity()>0){
             this.startRunAnimation();

@@ -54,10 +54,12 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
             if(this.animationManager.getDeathAnimationCompleted()){
                 this.shouldRemove = true;
             }
-            console.log(this.shouldRemove);
             return;
         }
 
+        if(this.getY() > 1000){
+            this.shouldRemove = true;
+        }
         this.moves.resetMoveConstraints();
         this.resolveCollisions();
         this.moves.update();

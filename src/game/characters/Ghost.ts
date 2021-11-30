@@ -32,10 +32,10 @@ class Ghost extends Character{
                 this.collisionWithSpring();
             }
             if(this.collisionArray[i].collider.collisionProperties.includes("enemy")){
-                // TODO Fix bug getting hit on game init
-                console.log(this.getX());
-                console.log(this.getY());
                 this.collisionWithEnemy(this.collisionArray[i]);
+            }
+            if(this.collisionArray[i].collider.collisionProperties.includes("damage")){
+                this.health.takeDamage();
             }
             // Splice out the collision
             this.collisionArray.splice(i, 1);
