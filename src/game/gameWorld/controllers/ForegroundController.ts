@@ -17,7 +17,8 @@ class ForegroundController {
     constructor(spriteManager:SpriteManager){
         this.foregrounds = [];
         this.noiseGenerator = Simple1DNoiseGenerator();
-        this.initialFill(spriteManager);
+        //this.initialFill(spriteManager);
+        this.testFill(spriteManager);
     }
 
     public pushNewForeground(foreground:Foreground):void{

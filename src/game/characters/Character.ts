@@ -60,6 +60,7 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
         if(this.getY() > 1000){
             this.shouldRemove = true;
         }
+        
         this.moves.resetMoveConstraints();
         this.resolveCollisions();
         this.moves.update();
@@ -81,7 +82,7 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
     }
 
     public removeFromStage(app: PIXI.Application): void {
-       app.stage.removeChild(this.character)
+       app.stage.removeChild(this.animationManager.character)
     }
     
     public moveRight(){
@@ -142,7 +143,6 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
     }
 
     protected collisionWithEnemy(collisionObj:collision):void{
-        console.log(collisionObj);
         if(collisionObj.bottomCollided){
             this.moves.jumpSpring()
             return;
