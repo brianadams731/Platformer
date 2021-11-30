@@ -2,6 +2,12 @@ import { collision } from "../interfaces/collisions";
 import { collisionData } from "../interfaces/collisions";
 
 export function checkCollision(self:collisionData,other:collisionData):collision{
+    // TODO IF TIME ALLOWS FIND BETTER FIX! THIS IS A SHIM TO TRIM OFF WONKY SPRITE WIDTH FROM GHOST SPRITE
+    if(self.collisionProperties.includes("player")){
+        self.width = self.width - 60;
+        self.x = self.x + 30;
+    }
+
     const collisionObj:collision = {
         collided:false,
         topCollided:false,

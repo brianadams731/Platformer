@@ -6,6 +6,7 @@ import { GivesPostition, position } from "../interfaces/givesPosition";
 import { Removable } from "../interfaces/gameObjects";
 import { AnimationManager } from "./AnimationManager";
 import { Health } from "./Health";
+import { Ghost } from "./Ghost";
 
 abstract class Character implements GivesCollisionData, GivesPostition, Collidable, Removable{
     protected character:PIXI.AnimatedSprite;
@@ -124,11 +125,21 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
         if(collisionObj.topCollided){
             this.y = collisionObj.collider.y + collisionObj.collider.height;
         }
+
         if(collisionObj.leftCollided){
-            this.x = collisionObj.collider.x + collisionObj.collider.width ;
+            if(this.collisionProperties.includes("player")){
+                this.x = collisionObj.collider.x + collisionObj.collider.width - 30;
+            }else{
+                this.x = collisionObj.collider.x + collisionObj.collider.width;
+            }
         }
+        
         if(collisionObj.rightCollided){
-            this.x = collisionObj.collider.x - this.character.width;
+            if(this.collisionProperties.includes("player")){
+                this.x = collisionObj.collider.x - this.character.width + 30;
+            }else{
+                this.x = collisionObj.collider.x - this.character.width;
+            }
         }
     }
 
