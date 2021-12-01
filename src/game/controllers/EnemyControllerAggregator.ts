@@ -7,9 +7,9 @@ import { PlayerFollower } from "./PlayerFollower";
 
 class EnemyControllerAggregator implements GetControllers{
     controllers:Controller[];
-    constructor(spriteManager:SpriteManager){
+    constructor(spriteManager:SpriteManager, mapMatrix:number[][]){
         this.controllers = [];
-        this.fill(spriteManager);
+        this.parseMapMatrix(spriteManager,mapMatrix);
     }
 
     public draw(app:Application){
@@ -43,11 +43,14 @@ class EnemyControllerAggregator implements GetControllers{
         return this.controllers;
     }
 
-    private fill(spriteManager:SpriteManager){
-        this.controllers.push(new PlayerFollower(spriteManager,600,0))
-        this.controllers.push(new PlayerFollower(spriteManager,642,0))
-        this.controllers.push(new PlayerFollower(spriteManager,682,0))
-        this.controllers.push(new PlayerFollower(spriteManager,693,0))
+    private parseMapMatrix(spriteManager:SpriteManager, mapMatrix:number[][]){
+        for(let i = 0;i<mapMatrix.length;i++){
+            for(let j = 0; j<mapMatrix[i].length;j++){
+                if(mapMatrix[i][j] === 4){
+                    this.controllers.push(new PlayerFollower(spriteManager,i*32,j*32))
+                }
+            }
+        }
     }
 }
 

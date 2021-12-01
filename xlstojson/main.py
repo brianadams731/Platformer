@@ -12,7 +12,11 @@ def convertToJSON(workbookname):
         column = []
         for j in range(1, sheet.max_row+1):
             cell_obj = sheet.cell(row=j, column=i)
-            column.append(cell_obj.value)
+            if type(cell_obj.value) == int:
+                column.append(cell_obj.value)
+            else:
+                column.append(0)
+                print(f"{cell_obj.value} is not a number, will substitute with 0")
         matrix.append(column)
 
 

@@ -6,8 +6,9 @@ import { gameInit } from "./utils/gameInit";
 import { Player } from "./controllers/Player";
 import { ForegroundController } from "./gameWorld/controllers/ForegroundController";
 import {SpriteManager} from "./SpriteManager";
-import { PlayerFollower } from "./controllers/PlayerFollower";
 import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregator";
+
+import * as mapMatrix from "../../xlstojson/leveltwo.json";
 
 function mainGame(spriteManagerOut: SpriteManager){
     const app = new PIXI.Application({
@@ -22,17 +23,14 @@ function mainGame(spriteManagerOut: SpriteManager){
     const spriteManager =  spriteManagerOut;
     const player = new Player(spriteManager, 250,-100) as Controller;
 
-    const foregroundController = new ForegroundController(spriteManager);
-    const enemyController = new EnemyControllerAggregator(spriteManager);
-    //const testEnemy = new PlayerFollower(spriteManager,600,0);
+    const foregroundController = new ForegroundController(spriteManager, mapMatrix.mapData);
+    const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
 
     const update = function(app:PIXI.Application){
         player.update();
         foregroundController.update(app);
 
         enemyController.update(app,player.getPosition());
-        //testEnemy.followPlayer(player.getPosition());
-        //testEnemy.update();
     }
     
     /*const lazyDraw = function(app:PIXI.Application){
@@ -45,10 +43,9 @@ function mainGame(spriteManagerOut: SpriteManager){
         foregroundController.draw(app);
 
         enemyController.draw(app);
-        //testEnemy.draw(app);
     }
 
-    const collisionChecker = function(player:Controller, testEnemy:Controller[]){
+    const collisionChecker = function(player:Controller, enemyController:Controller[]){
         for(let i = 0; i < foregroundController.getForeground().length; i++){ // Player vs Foreground
             const collision = checkCollision(player.getCollisionData(),foregroundController.getForeground()[i].getCollisionData());
             if(collision.collided){
@@ -62,20 +59,20 @@ function mainGame(spriteManagerOut: SpriteManager){
                 }
             }
             // For test enemy;
-            for(let j = 0; j<testEnemy.length;j++){
-                const collisionTwo = checkCollision(testEnemy[j].getCollisionData(),foregroundController.getForeground()[i].getCollisionData());
+            for(let j = 0; j<enemyController.length;j++){
+                const collisionTwo = checkCollision(enemyController[j].getCollisionData(),foregroundController.getForeground()[i].getCollisionData());
                 if(collisionTwo.collided){
-                    testEnemy[j].pushToColliderArray(collisionTwo);
+                    enemyController[j].pushToColliderArray(collisionTwo);
                 } 
             }          
         }
 
         // For test enemy
-        for(let i = 0; i<testEnemy.length;i++){
-            const collision = checkCollision(player.getCollisionData(),testEnemy[i].getCollisionData())
+        for(let i = 0; i<enemyController.length;i++){
+            const collision = checkCollision(player.getCollisionData(),enemyController[i].getCollisionData())
             if(collision.collided){
                 player.pushToColliderArray(collision);
-                testEnemy[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
+                enemyController[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
             }
         }
     }

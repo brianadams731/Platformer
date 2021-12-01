@@ -54,10 +54,13 @@ abstract class Enemy extends Character implements ControlEnemyMoveLogic{
             return; // if player is not close vertically, enemy will not follow
         }
 
-        if(playerPosition.x + playerPosition.width < this.getPosition().x){
+        const selfMiddleX = this.getPosition().width/2;
+        const playerMidX = playerPosition.width/2;
+
+        if(playerPosition.x + playerMidX < this.getPosition().x + selfMiddleX){
             this.setShouldMoveLeft(true);
             this.setShouldMoveRight(false);
-        }else if (playerPosition.x > this.getPosition().x + this.getPosition().width){
+        }else if (playerPosition.x + playerMidX > this.getPosition().x + selfMiddleX){
             this.setShouldMoveLeft(false);
             this.setShouldMoveRight(true);
         }else{
@@ -68,7 +71,7 @@ abstract class Enemy extends Character implements ControlEnemyMoveLogic{
 
     protected resolveCollisions():void{
         for (let i = this.collisionArray.length - 1; i >= 0; i--) {
-            if(this.collisionArray[i].collider.collisionProperties.includes("solid")){
+            if(this.collisionArray[i].collider.collisionProperties.includes("solid") && !this.collisionArray[i].collider.collisionProperties.includes("player")){
                 this.collisionWithSolid(this.collisionArray[i]);
 
                 if(this.collisionArray[i].leftCollided || this.collisionArray[i].rightCollided){

@@ -8,17 +8,20 @@ import { Spike } from "../foreground/Spike";
 import { Spring } from "../foreground/Spring";
 
 import {generator, Simple1DNoiseGenerator} from "../../utils/Simple1DNoiseGenerator";
-import {getRandomInt} from "../../utils/randomInt";
+import { Goal } from "../foreground/Goal";
+//import {getRandomInt} from "../../utils/randomInt";
 
 class ForegroundController {
     foregrounds:Foreground[];
     noiseGenerator:generator;
 
-    constructor(spriteManager:SpriteManager){
+    constructor(spriteManager:SpriteManager, mapMatrix:number[][]){
         this.foregrounds = [];
         this.noiseGenerator = Simple1DNoiseGenerator();
-        //this.initialFill(spriteManager);
-        this.testFill(spriteManager);
+
+        //this.generateChunk(0,spriteManager);
+        //this.testFill(spriteManager);
+        this.parseMapMatrix(spriteManager, mapMatrix,);
     }
 
     public pushNewForeground(foreground:Foreground):void{
@@ -36,17 +39,6 @@ class ForegroundController {
     }
 
     public draw(app:PIXI.Application):void{
-        /*
-        const leftBound = app.stage.pivot.x - app.renderer.width/4;
-        const rightBound = app.stage.pivot.x + app.renderer.width/4;
-
-        for(let i=0; i<this.foregrounds.length; i++){
-            if(this.foregrounds[i].getCollisionData().x < leftBound || this.foregrounds[i].getCollisionData().x > rightBound){ // CULLING ALL ALL FOREGROUND OFF SCREEN
-                this.foregrounds[i].removeFromStage(app);
-            }
-            this.foregrounds[i].draw(app);
-        }
-        */
         for(let i=0; i<this.foregrounds.length; i++){
             this.foregrounds[i].draw(app);
         }
@@ -56,7 +48,8 @@ class ForegroundController {
         return this.foregrounds;
     }
 
-    public generateChunk(pixelToStartAt:number, spriteManager:SpriteManager):void{
+    // USE TO PROCEDURALLY GENERATE MAP
+    /*public generateChunk(pixelToStartAt:number, spriteManager:SpriteManager):void{
         const indexStart = pixelToStartAt/16;
         const endIndex = indexStart + 1000;
         let randInt = -1;
@@ -85,11 +78,8 @@ class ForegroundController {
             }
             this.foregrounds.push(new DirtGround(i*32,this.noiseGenerator.getVal(i)*1.5,spriteManager));
         }
-    }
+    }*/
 
-    private initialFill(spriteManager:SpriteManager):void{
-        this.generateChunk(0,spriteManager);
-    }
 
     private testFill(spriteManager:SpriteManager):void{
         for(let i=0; i<100 ;i++){
@@ -109,6 +99,22 @@ class ForegroundController {
 
         this.foregrounds.push(new Spring(650+32,350-16*2 - 1, spriteManager))
         this.foregrounds.push(new Coin(650+200,350-44, spriteManager));
+    }
+
+    private parseMapMatrix(spriteManager:SpriteManager, mapMatrix:number[][]){
+        for(let i = 0;i<mapMatrix.length;i++){
+            for(let j = 0; j<mapMatrix[i].length;j++){
+                if(mapMatrix[i][j] === 1){
+                    this.foregrounds.push(new DirtGround(i*32,j*32, spriteManager))
+                }else if(mapMatrix[i][j] === 2){
+                    this.foregrounds.push(new Coin(i*32,j*32, spriteManager));
+                }else if(mapMatrix[i][j] === 3){
+                    this.foregrounds.push(new Spike(i*32,j*32,spriteManager));
+                }else if(mapMatrix[i][j] === 5){
+                    this.foregrounds.push(new Goal(i*32,j*32,spriteManager))
+                }
+            }
+        }
     }
 }
 

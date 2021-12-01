@@ -37,6 +37,9 @@ class Ghost extends Character{
             if(this.collisionArray[i].collider.collisionProperties.includes("damage")){
                 this.health.takeDamage();
             }
+            if(this.collisionArray[i].collider.collisionProperties.includes("goal")){
+                console.log("goal")
+            }
             // Splice out the collision
             this.collisionArray.splice(i, 1);
         }
