@@ -21,7 +21,7 @@ function mainGame(spriteManagerOut: SpriteManager){
 
     // GAME OBJECTS INIT
     const spriteManager =  spriteManagerOut;
-    const player = new Player(spriteManager, 250,-100) as Controller;
+    const player = new Player(spriteManager, 250,-100);
 
     const foregroundController = new ForegroundController(spriteManager, mapMatrix.mapData);
     const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
@@ -77,7 +77,8 @@ function mainGame(spriteManagerOut: SpriteManager){
         }
     }
 
-    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders, check to make sure this works with animations!!!
+    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
+    
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
         app.stage.pivot.y = lazyUpdateCameraY(player,app.stage.pivot.y)
@@ -87,6 +88,9 @@ function mainGame(spriteManagerOut: SpriteManager){
 
         if(player.getShouldRemove()){
             console.log("dead")
+        }
+        if(player.getReachedGoal()){
+            console.log("goal from main")
         }
     });
     

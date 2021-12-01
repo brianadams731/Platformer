@@ -4,10 +4,12 @@ import { AnimationManager } from "./AnimationManager";
 //import {collisionData} from "../interfaces/collisions"
 
 class Ghost extends Character{
+    public reachedGoal:boolean
     constructor(spriteManager:SpriteManager, x:number,y:number){
         super(x,y,10,1,25, new AnimationManager(spriteManager.getGhost(),"ghost-idel","ghost-run","ghost-jump","ghost-fall","ghost-death",x,y)
         )
         this.setCollisionProperties(["player","solid"]);
+        this.reachedGoal = false;
     }
 
     /*public getCollisionData():collisionData{
@@ -38,7 +40,7 @@ class Ghost extends Character{
                 this.health.takeDamage();
             }
             if(this.collisionArray[i].collider.collisionProperties.includes("goal")){
-                console.log("goal")
+                this.reachedGoal = true;
             }
             // Splice out the collision
             this.collisionArray.splice(i, 1);
