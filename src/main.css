@@ -2,11 +2,84 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'DotGothic16', sans-serif;
 }
+
 body{
     overflow: hidden;
 }
 
 canvas{
     display: block;
+}
+
+
+.mainMenuWrapper{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    gap:15px;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 50px;
+    align-items: center;
+}
+
+.titleBox{
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px;
+    height: 300px;
+}
+
+.titleBox h1{
+    font-size: 3rem;
+}
+.titleBox h3{
+    font-size: 1.5rem;
+}
+
+.mainMenuWrapper #cartrage{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    max-height: 300px;
+    opacity: 1;
+}
+
+.arcadeBtn{
+    border: none;
+    background: #cb4e4e;
+    border-radius: 40px;
+    box-shadow: 0 6px #ab3c3c;
+    color: white;
+    cursor: pointer;
+    padding: 25px 80px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    transition: opacity 0.3s;
+}
+
+.arcadeBtn:hover{
+    transform: translate(0,3px);
+    box-shadow: 0 3px #ab3c3c;
+}
+
+.arcadeBtn:active{
+    transform: translate(0,6px);
+    box-shadow: none;
+}
+
+.arcadeBtn:focus{
+    outline: 0;
 }
