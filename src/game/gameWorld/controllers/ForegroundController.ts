@@ -7,7 +7,7 @@ import { Spike } from "../foreground/Spike";
 
 import { Spring } from "../foreground/Spring";
 
-import {generator, Simple1DNoiseGenerator} from "../../utils/Simple1DNoiseGenerator";
+import {generator, Simple1DNoiseGenerator} from "../../utils/simple1DNoiseGenerator";
 import { Goal } from "../foreground/Goal";
 //import {getRandomInt} from "../../utils/randomInt";
 
