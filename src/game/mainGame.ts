@@ -96,9 +96,9 @@ function mainGame(spriteManagerOut: SpriteManager){
         }
         if(player.getReachedGoal()){
             app.destroy(true);
-            //initGameOverMenu(true,player.getScore(),spriteManager,()=>{
-            //    mainGame(spriteManager);
-            //})
+            initGameOverMenu(true,player.getScore(),spriteManager,()=>{
+                mainGame(spriteManager);
+            })
         }
     });    
 }

@@ -160,7 +160,7 @@ abstract class Character implements GivesCollisionData, GivesPostition, Collidab
         }
 
         if(collisionObj.leftCollided){
-            this.moves.pushFoward();
+            this.moves.pushForward();
         }else if(collisionObj.rightCollided){
             this.moves.pushBack();
         }

@@ -32,7 +32,7 @@ class Moves{
     public pushBack(){
         this.velocity.addToXVelocity(-100)
     }
-    public pushFoward(){
+    public pushForward(){
         this.velocity.addToXVelocity(100)
     }
 
@@ -44,7 +44,7 @@ class Moves{
     }
 
     public jumpSpring(){
-        this.velocity.jumpYVelocity(this.jumpHeight*1.4);
+        this.velocity.jumpYVelocity(this.jumpHeight*1.1);
         this.canJump = false;
     }
 

@@ -13,9 +13,18 @@ const initGameOverMenu=(reachedGoal:boolean,score:number, spriteManager:SpriteMa
     `
     gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.addEventListener("click",()=>{
         gameStart(spriteManager);
-        //gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.disabled = true;
-        //gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.classList.add("remove-hover-pointer")
+        gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.disabled = true;
+        gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.classList.add("remove-hover-pointer")
+        gameOverNode.querySelector<HTMLDivElement>(".gameOverWrapper")!.style.animationName = "fadeOut";
     })
+
+    gameOverNode.querySelector<HTMLDivElement>(".gameOverWrapper")!.addEventListener("animationend",(e)=>{
+        if(e.animationName !== "fadeOut"){
+            return
+        }
+        gameOverNode.remove();
+    })
+    
     document.querySelector("body")?.appendChild(gameOverNode);
 }
 

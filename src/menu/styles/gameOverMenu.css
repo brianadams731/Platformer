@@ -10,7 +10,9 @@
     gap:30px;
     justify-content: center;
     align-items: center;
-    animation: fadeIn 1s ease-in-out;
+    animation-name: fadeIn;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
