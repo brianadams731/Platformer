@@ -15,10 +15,12 @@ import { StaticForeground } from "../foreground/StaticForeground";
 
 class ForegroundController {
     foregrounds:Foreground[];
+    foregroundsFiller:Foreground[]
     //noiseGenerator:generator;
 
     constructor(spriteManager:SpriteManager, mapMatrix:number[][]){
         this.foregrounds = [];
+        this.foregroundsFiller = [];
         //this.noiseGenerator = Simple1DNoiseGenerator();
 
         //this.generateChunk(0,spriteManager);
@@ -46,6 +48,9 @@ class ForegroundController {
                 this.foregrounds[i].draw(app);
             }
         }
+        this.foregroundsFiller.forEach(item=>{
+            item.draw(app);
+        })
     }
 
     public animatedDraw(app:PIXI.Application):void{
