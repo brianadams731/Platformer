@@ -1,0 +1,41 @@
+.gameOverWrapper{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.textBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameOverWrapper h1, .gameOverWrapper h3{
+    text-align: center;
+    letter-spacing: 2px;
+}
+.gameOverWrapper h1{
+    font-size: 4rem;
+}
+.gameOverWrapper h3{
+    font-size: 1.5rem;
+    color:white;
+}
+
+.win{
+    color:yellow;
+}
+.lose{
+    color: red;
+}

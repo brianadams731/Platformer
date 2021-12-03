@@ -2,9 +2,8 @@ import { SpriteManager } from "../game/SpriteManager";
 import imgUrl from "./assets/cartrage.png";
 
 const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:SpriteManager)=>void) =>{
-    const body = document.querySelector('body')!;
+    const body = document.querySelector<HTMLBodyElement>('body')!;
     const menuNode = document.createElement('div');
-
 
     body.innerHTML = "";
     menuNode.innerHTML = `
@@ -20,15 +19,33 @@ const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:Spri
         </div>
     `
 
-    body.appendChild(menuNode);
+    menuNode.querySelector<HTMLImageElement>('#cartrage')!.src = imgUrl;
 
-    document.querySelector<HTMLImageElement>('#cartrage')!.src = imgUrl;
-    document.querySelector("#playButton")?.addEventListener("click",()=>{
+    menuNode.querySelector<HTMLButtonElement>("#playButton")?.addEventListener("click",(e)=>{
         if(spriteManager.getAreAssetsLoaded()){
-            gameStart(spriteManager);
-            body.removeChild(menuNode);
+            menuNode.querySelector<HTMLImageElement>("#cartrage")!.style.animationName = "dropDown";
+            menuNode.querySelector<HTMLButtonElement>("#playButton")!.style.animationName = "fadeOut";
         }
     })
+
+    menuNode.querySelector<HTMLButtonElement>("#playButton")?.addEventListener("animationend",(e)=>{
+        e.stopPropagation();
+    })
+    menuNode.querySelector<HTMLImageElement>('#cartrage')!.addEventListener("animationend",(e)=>{
+        if(e.animationName !== "dropDown"){
+            return;
+        }
+        gameStart(spriteManager);
+        menuNode.querySelector<HTMLDivElement>(".mainMenuWrapper")!.style.animationName = "fadeOut";
+    })
+    menuNode.querySelector<HTMLDivElement>(".mainMenuWrapper")!.addEventListener("animationend",(e)=>{
+        if(e.animationName !== "fadeOut"){
+            return;
+        }
+        menuNode.remove();
+    })
+        
+    body.appendChild(menuNode);
 }
 
 export {initMainMenu};

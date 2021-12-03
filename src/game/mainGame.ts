@@ -18,7 +18,7 @@ function mainGame(spriteManagerOut: SpriteManager){
         backgroundColor:0x34202b
     });
     gameInit(app);
-
+    document.querySelector<HTMLCanvasElement>("canvas")!.focus
     // GAME OBJECTS INIT
     const spriteManager =  spriteManagerOut;
     const player = new Player(spriteManager, 250,-100);
@@ -85,15 +85,15 @@ function mainGame(spriteManagerOut: SpriteManager){
         update(app); // not setting x values in animationManager until update
         collisionChecker(player, enemyController.getControllers());
         eagerDraw(app); // Everything that needs to be redrawn every render goes here
-
         if(player.getShouldRemove()){
-            console.log("dead")
+            app.destroy(true);
         }
         if(player.getReachedGoal()){
-            console.log("goal from main")
+            app.destroy(true)
         }
     });
     
+    console.log("end reached");
 }
 
 export {mainGame};
