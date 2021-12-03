@@ -8,6 +8,8 @@ import { ForegroundController } from "./gameWorld/controllers/ForegroundControll
 import {SpriteManager} from "./SpriteManager";
 import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregator";
 
+import { initGameOverMenu } from "../menu/gameOverMenu";
+
 import * as mapMatrix from "../../xlstojson/leveltwo.json";
 
 function mainGame(spriteManagerOut: SpriteManager){
@@ -85,15 +87,20 @@ function mainGame(spriteManagerOut: SpriteManager){
         update(app); // not setting x values in animationManager until update
         collisionChecker(player, enemyController.getControllers());
         eagerDraw(app); // Everything that needs to be redrawn every render goes here
+        
         if(player.getShouldRemove()){
             app.destroy(true);
+            initGameOverMenu(false,player.getScore(),spriteManager,()=>{
+                mainGame(spriteManager);
+            })
         }
         if(player.getReachedGoal()){
-            app.destroy(true)
+            app.destroy(true);
+            //initGameOverMenu(true,player.getScore(),spriteManager,()=>{
+            //    mainGame(spriteManager);
+            //})
         }
-    });
-    
-    console.log("end reached");
+    });    
 }
 
 export {mainGame};

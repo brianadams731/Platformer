@@ -27,6 +27,7 @@
     align-items: center;
     padding: 30px;
     height: var(--height-of-cartrage);
+    user-select: none;
 }
 
 .titleBox h1, .titleBox h3{

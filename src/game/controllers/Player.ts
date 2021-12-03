@@ -7,15 +7,12 @@ import { SpriteManager } from "../SpriteManager";
 
 class Player extends Controller implements Collidable{
     private inputController: InputController;
-    private score: number;
 
     constructor(spriteManager:SpriteManager, x:number, y:number){
         super(
             new Ghost(spriteManager, x, y)
         )
         this.inputController = new InputController();
-
-        this.score = 0;
     }
     
     update():void{
@@ -36,8 +33,12 @@ class Player extends Controller implements Collidable{
     }
 
     getScore():number{
-        return this.score;
+        if(this.character instanceof Ghost){
+            return this.character.score;
+        }
+        return 0;
     }
+
     getReachedGoal():boolean{
         if(this.character instanceof Ghost){
             return this.character.reachedGoal;

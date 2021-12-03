@@ -3,7 +3,6 @@ import { mainGame } from "./game/mainGame";
 import {SpriteManager} from "./game/SpriteManager";
 
 import {initMainMenu} from "./menu/mainMenu"; 
-import {initGameOverMenu} from "./menu/gameOverMenu";
 
 PIXI.utils.skipHello();
 const spriteManager = new SpriteManager();

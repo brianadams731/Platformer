@@ -21,10 +21,12 @@ const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:Spri
 
     menuNode.querySelector<HTMLImageElement>('#cartrage')!.src = imgUrl;
 
-    menuNode.querySelector<HTMLButtonElement>("#playButton")?.addEventListener("click",(e)=>{
+    menuNode.querySelector<HTMLButtonElement>("#playButton")?.addEventListener("click",()=>{
         if(spriteManager.getAreAssetsLoaded()){
             menuNode.querySelector<HTMLImageElement>("#cartrage")!.style.animationName = "dropDown";
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.style.animationName = "fadeOut";
+            menuNode.querySelector<HTMLButtonElement>("#playButton")!.classList.add("remove-hover-pointer");
+            menuNode.querySelector<HTMLButtonElement>("#playButton")!.disabled = true;
         }
     })
 
