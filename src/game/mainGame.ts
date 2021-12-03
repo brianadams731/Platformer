@@ -5,14 +5,15 @@ import { lazyUpdateCameraY, updateCameraX } from "./utils/camera";
 import { gameInit } from "./utils/gameInit";
 import { Player } from "./controllers/Player";
 import { ForegroundController } from "./gameWorld/controllers/ForegroundController";
-import {SpriteManager} from "./SpriteManager";
+import { SpriteManager } from "./SpriteManager";
+import { SoundManager } from "./SoundManager";
 import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregator";
 
 import { initGameOverMenu } from "../menu/gameOverMenu";
 
 import * as mapMatrix from "../../xlstojson/leveltwo.json";
 
-function mainGame(spriteManagerOut: SpriteManager){
+function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):void{
     const app = new PIXI.Application({
         antialias:false,
         height:window.innerHeight,
@@ -20,7 +21,7 @@ function mainGame(spriteManagerOut: SpriteManager){
         backgroundColor:0x34202b
     });
     gameInit(app);
-    document.querySelector<HTMLCanvasElement>("canvas")!.focus
+    document.querySelector<HTMLCanvasElement>("canvas")!.focus();
     // GAME OBJECTS INIT
     const spriteManager =  spriteManagerOut;
     const player = new Player(spriteManager, 250,-100);
@@ -30,21 +31,18 @@ function mainGame(spriteManagerOut: SpriteManager){
 
     const update = function(app:PIXI.Application){
         player.update();
-        foregroundController.update(app);
-
         enemyController.update(app,player.getPosition());
+        foregroundController.update(app);
     }
     
-    /*const lazyDraw = function(app:PIXI.Application){
-        // TODO break apart the static forground, and include what doesnt need to be rerendered in here!!!
-        //foregroundController.draw(app);
-    }*/
-
     const eagerDraw = function(app:PIXI.Application){
         player.draw(app);
-        foregroundController.draw(app);
-
+        foregroundController.animatedDraw(app);
         enemyController.draw(app);
+    }
+
+    const lazyDraw = function(app:PIXI.Application){
+        foregroundController.staticDraw(app);
     }
 
     const collisionChecker = function(player:Controller, enemyController:Controller[]){
@@ -53,6 +51,7 @@ function mainGame(spriteManagerOut: SpriteManager){
             if(collision.collided){
                 player.pushToColliderArray(collision);
                 if(foregroundController.getForeground()[i].getCollisionData().collisionProperties.includes("coin")){
+                    soundManager.playCoinCollection();
                     foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
                 }
 
@@ -60,7 +59,7 @@ function mainGame(spriteManagerOut: SpriteManager){
                     foregroundController.getForeground()[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
                 }
             }
-            // For test enemy;
+            // For enemies;
             for(let j = 0; j<enemyController.length;j++){
                 const collisionTwo = checkCollision(enemyController[j].getCollisionData(),foregroundController.getForeground()[i].getCollisionData());
                 if(collisionTwo.collided){
@@ -69,18 +68,18 @@ function mainGame(spriteManagerOut: SpriteManager){
             }          
         }
 
-        // For test enemy
+        // For enemies
         for(let i = 0; i<enemyController.length;i++){
             const collision = checkCollision(player.getCollisionData(),enemyController[i].getCollisionData())
             if(collision.collided){
+                soundManager.playHit();
                 player.pushToColliderArray(collision);
                 enemyController[i].pushToColliderArray(invertCollisionObj(collision,player.getCollisionData()));
             }
         }
     }
 
-    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
-    
+    lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
         app.stage.pivot.y = lazyUpdateCameraY(player,app.stage.pivot.y)
@@ -90,17 +89,21 @@ function mainGame(spriteManagerOut: SpriteManager){
         
         if(player.getShouldRemove()){
             app.destroy(true);
-            initGameOverMenu(false,player.getScore(),spriteManager,()=>{
-                mainGame(spriteManager);
+            initGameOverMenu(false,player.getScore(),spriteManager,soundManager,()=>{
+                mainGame(spriteManager,soundManager);
             })
         }
         if(player.getReachedGoal()){
             app.destroy(true);
-            initGameOverMenu(true,player.getScore(),spriteManager,()=>{
-                mainGame(spriteManager);
+            initGameOverMenu(true,player.getScore(),spriteManager,soundManager,()=>{
+                mainGame(spriteManager,soundManager);
             })
         }
     });    
 }
 
-export {mainGame};
+type MainGame = {
+    (spriteManager:SpriteManager,soundManager:SoundManager):void
+}
+
+export {mainGame, MainGame};

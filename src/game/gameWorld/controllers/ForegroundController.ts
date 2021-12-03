@@ -5,19 +5,21 @@ import { DirtGround } from "../foreground/DirtGround";
 import { Foreground } from "../foreground/Foreground";
 import { Spike } from "../foreground/Spike";
 
-import { Spring } from "../foreground/Spring";
+//import { Spring } from "../foreground/Spring";
 
-import {generator, Simple1DNoiseGenerator} from "../../utils/simple1DNoiseGenerator";
+//import {generator, Simple1DNoiseGenerator} from "../../utils/simple1DNoiseGenerator";
 import { Goal } from "../foreground/Goal";
+import { AnimatedForeground } from "../foreground/AnimatedForeground";
+import { StaticForeground } from "../foreground/StaticForeground";
 //import {getRandomInt} from "../../utils/randomInt";
 
 class ForegroundController {
     foregrounds:Foreground[];
-    noiseGenerator:generator;
+    //noiseGenerator:generator;
 
     constructor(spriteManager:SpriteManager, mapMatrix:number[][]){
         this.foregrounds = [];
-        this.noiseGenerator = Simple1DNoiseGenerator();
+        //this.noiseGenerator = Simple1DNoiseGenerator();
 
         //this.generateChunk(0,spriteManager);
         //this.testFill(spriteManager);
@@ -38,9 +40,19 @@ class ForegroundController {
         }
     }
 
-    public draw(app:PIXI.Application):void{
+    public staticDraw(app:PIXI.Application):void{
         for(let i=0; i<this.foregrounds.length; i++){
-            this.foregrounds[i].draw(app);
+            if(this.foregrounds[i] instanceof StaticForeground){
+                this.foregrounds[i].draw(app);
+            }
+        }
+    }
+
+    public animatedDraw(app:PIXI.Application):void{
+        for(let i=0; i<this.foregrounds.length; i++){
+            if(this.foregrounds[i] instanceof AnimatedForeground){
+                this.foregrounds[i].draw(app);
+            }
         }
     }
 
@@ -79,27 +91,6 @@ class ForegroundController {
             this.foregrounds.push(new DirtGround(i*32,this.noiseGenerator.getVal(i)*1.5,spriteManager));
         }
     }*/
-
-
-    private testFill(spriteManager:SpriteManager):void{
-        for(let i=0; i<100 ;i++){
-            this.foregrounds.push(new DirtGround(i*16*2,550, spriteManager));
-        }
-        for(let i=0;i<7;i++){
-            this.foregrounds.push(new DirtGround(50,550-(16*2*i), spriteManager))
-        }
-
-
-        for(let i=0;i<12;i++){
-            this.foregrounds.push(new DirtGround(500+i*16*2,450, spriteManager))
-        }
-        for(let i=0;i<100;i++){
-            this.foregrounds.push(new DirtGround(650+i*16*2,350, spriteManager))
-        }
-
-        this.foregrounds.push(new Spring(650+32,350-16*2 - 1, spriteManager))
-        this.foregrounds.push(new Coin(650+200,350-44, spriteManager));
-    }
 
     private parseMapMatrix(spriteManager:SpriteManager, mapMatrix:number[][]){
         for(let i = 0;i<mapMatrix.length;i++){

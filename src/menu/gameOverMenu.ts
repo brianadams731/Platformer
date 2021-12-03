@@ -1,6 +1,8 @@
+import { MainGame } from "../game/mainGame";
+import { SoundManager } from "../game/SoundManager";
 import { SpriteManager } from "../game/SpriteManager";
 
-const initGameOverMenu=(reachedGoal:boolean,score:number, spriteManager:SpriteManager, gameStart:(spriteManager:SpriteManager)=>void):void=>{
+const initGameOverMenu=(reachedGoal:boolean,score:number, spriteManager:SpriteManager, soundManager:SoundManager, gameStart:MainGame):void=>{
     const gameOverNode = document.createElement("div");
     gameOverNode.innerHTML = `
         <div class="gameOverWrapper">
@@ -12,7 +14,7 @@ const initGameOverMenu=(reachedGoal:boolean,score:number, spriteManager:SpriteMa
         </div>
     `
     gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.addEventListener("click",()=>{
-        gameStart(spriteManager);
+        gameStart(spriteManager, soundManager);
         gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.disabled = true;
         gameOverNode.querySelector<HTMLButtonElement>("#restartBtn")!.classList.add("remove-hover-pointer")
         gameOverNode.querySelector<HTMLDivElement>(".gameOverWrapper")!.style.animationName = "fadeOut";

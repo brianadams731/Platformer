@@ -1,7 +1,9 @@
+import { MainGame } from "../game/mainGame";
+import { SoundManager } from "../game/SoundManager";
 import { SpriteManager } from "../game/SpriteManager";
 import imgUrl from "./assets/cartrage.png";
 
-const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:SpriteManager)=>void) =>{
+const initMainMenu = (spriteManager:SpriteManager, soundManager:SoundManager, gameStart:MainGame) =>{
     const body = document.querySelector<HTMLBodyElement>('body')!;
     const menuNode = document.createElement('div');
 
@@ -27,6 +29,7 @@ const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:Spri
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.style.animationName = "fadeOut";
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.classList.add("remove-hover-pointer");
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.disabled = true;
+            soundManager.playSoundTrack();
         }
     })
 
@@ -37,7 +40,7 @@ const initMainMenu = (spriteManager:SpriteManager, gameStart:(spriteManager:Spri
         if(e.animationName !== "dropDown"){
             return;
         }
-        gameStart(spriteManager);
+        gameStart(spriteManager,soundManager);
         menuNode.querySelector<HTMLDivElement>(".mainMenuWrapper")!.style.animationName = "fadeOut";
     })
     menuNode.querySelector<HTMLDivElement>(".mainMenuWrapper")!.addEventListener("animationend",(e)=>{
