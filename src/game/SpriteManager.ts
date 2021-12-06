@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+
 class SpriteManager{
     private ghost: PIXI.Spritesheet|undefined;
     private coin: PIXI.Spritesheet|undefined;
