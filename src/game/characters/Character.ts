@@ -6,7 +6,6 @@ import { GivesPostition, position } from "../interfaces/givesPosition";
 import { Removable } from "../interfaces/gameObjects";
 import { AnimationManager } from "./AnimationManager";
 import { Health } from "./Health";
-import { Ghost } from "./Ghost";
 
 abstract class Character implements GivesCollisionData, GivesPostition, Collidable, Removable{
     protected character:PIXI.AnimatedSprite;
