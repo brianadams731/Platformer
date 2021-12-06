@@ -72,7 +72,6 @@ class Skybox{
         mountainsSprite.scale.y = 3;
         mountainsSprite.x = x;
         mountainsSprite.y = stageHeight - mountainsSprite.height * 2.1;
-        console.log(mountainsSprite.width)
         this.mountains.push(new SkyboxSprite(mountainsSprite,x,.9));
     }
     private pushTreeBack(x:number, stageHeight:number, spriteManager:SpriteManager){

@@ -14,23 +14,23 @@ class SpriteManager{
     constructor(){
         this.areAssetsLoaded = false;
         PIXI.Loader.shared
-            .add("../../assets/Ghost/ghost.json")
-            .add("../../assets/Coin/coin.json")
-            .add("../../assets/Mushroom/mushroom.json")
-            .add("../../assets/Slime/slime.json")
-            .add("../../assets/Cave/cave.json")
-            .add("../../assets/Skybox/skybox.json")
-            .add("../../assets/Decoration/decoration.json")
-            .add("../../assets/Earth/earth.json")
+            .add("/Ghost/ghost.json")
+            .add("/Coin/coin.json")
+            .add("/Mushroom/mushroom.json")
+            .add("/Slime/slime.json")
+            .add("/Cave/cave.json")
+            .add("/Skybox/skybox.json")
+            .add("/Decoration/decoration.json")
+            .add("/Earth/earth.json")
             .load(()=>{
-                this.ghost = PIXI.Loader.shared.resources["../../assets/Ghost/ghost.json"].spritesheet;
-                this.coin = PIXI.Loader.shared.resources["../../assets/Coin/coin.json"].spritesheet;
-                this.mushroom = PIXI.Loader.shared.resources["../../assets/Mushroom/mushroom.json"].spritesheet;
-                this.slime = PIXI.Loader.shared.resources["../../assets/Slime/slime.json"].spritesheet;
-                this.cave = PIXI.Loader.shared.resources["../../assets/Cave/cave.json"].spritesheet;
-                this.skybox = PIXI.Loader.shared.resources["../../assets/Skybox/skybox.json"].spritesheet;
-                this.decoration = PIXI.Loader.shared.resources["../../assets/Decoration/decoration.json"].spritesheet;
-                this.earth = PIXI.Loader.shared.resources["../../assets/Earth/earth.json"].spritesheet;
+                this.ghost = PIXI.Loader.shared.resources["/Ghost/ghost.json"].spritesheet;
+                this.coin = PIXI.Loader.shared.resources["/Coin/coin.json"].spritesheet;
+                this.mushroom = PIXI.Loader.shared.resources["/Mushroom/mushroom.json"].spritesheet;
+                this.slime = PIXI.Loader.shared.resources["/Slime/slime.json"].spritesheet;
+                this.cave = PIXI.Loader.shared.resources["/Cave/cave.json"].spritesheet;
+                this.skybox = PIXI.Loader.shared.resources["/Skybox/skybox.json"].spritesheet;
+                this.decoration = PIXI.Loader.shared.resources["/Decoration/decoration.json"].spritesheet;
+                this.earth = PIXI.Loader.shared.resources["/Earth/earth.json"].spritesheet;
                 this.areAssetsLoaded = true;
             })
     }
