@@ -46,17 +46,16 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
     }
     
     const eagerDraw = function(app:PIXI.Application){
-        backgroundController.draw(app);
-        foregroundController.staticDraw(app);
-
         player.draw(app);
         foregroundController.animatedDraw(app);
         enemyController.draw(app);
     }
 
-    /*const lazyDraw = function(app:PIXI.Application){
+    const lazyDraw = function(app:PIXI.Application){
+        backgroundController.draw(app);
         backgroundController.drawBackground(app);
-    }*/
+        foregroundController.staticDraw(app);
+    }
 
     const collisionChecker = function(player:Controller, enemyController:Controller[]){
         for(let i = 0; i < foregroundController.getForeground().length; i++){ // Player vs Foreground
@@ -92,6 +91,7 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
         }
     }
 
+    lazyDraw(app);
 
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);

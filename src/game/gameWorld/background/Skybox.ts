@@ -16,12 +16,12 @@ class Skybox{
         this.treeBack = [];
         this.treeFront = [];
 
-        const length = Math.ceil(stageWidth/4100);
+        const length = Math.ceil(stageWidth/4128);
         for(let i = -1; i< length;i++){
-            this.pushCloud(i*4100,stageHeight,spriteManager);
-            this.pushMountain(i*4100,stageHeight,spriteManager);
-            this.pushTreeBack(i*4100,stageHeight,spriteManager);
-            this.pushTreeFront(i*4100,stageHeight,spriteManager);
+            this.pushCloud(i*4128,stageHeight,spriteManager);
+            this.pushMountain(i*4128,stageHeight,spriteManager);
+            this.pushTreeBack(i*4128,stageHeight,spriteManager);
+            this.pushTreeFront(i*4128,stageHeight,spriteManager);
         }
     }
 
@@ -72,7 +72,7 @@ class Skybox{
         mountainsSprite.scale.y = 3;
         mountainsSprite.x = x;
         mountainsSprite.y = stageHeight - mountainsSprite.height * 2.1;
-        
+        console.log(mountainsSprite.width)
         this.mountains.push(new SkyboxSprite(mountainsSprite,x,.9));
     }
     private pushTreeBack(x:number, stageHeight:number, spriteManager:SpriteManager){
