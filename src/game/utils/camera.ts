@@ -1,27 +1,35 @@
+import { Application } from "@pixi/app";
 import { Controller } from "../controllers/Controller";
-const lazyUpdateCameraY = function(player:Controller, pivotYLocation:number):number{
-    let playerCenterY = player.getCollisionData().y + player.getCollisionData().height/2;
+const lazyUpdateCameraY = function(app:Application, player:Controller, mapHeight:number):number{
+    const pivotYLocation = app.stage.pivot.y;
+    const playerCenterY = player.getCollisionData().y + player.getCollisionData().height/2;
+
+    let cameraLoc = pivotYLocation;
+
     if(playerCenterY >= pivotYLocation + 120){  // bottom y camera bound
-        return pivotYLocation + 16;
+        cameraLoc = pivotYLocation + 16;
     }else if(playerCenterY > pivotYLocation + 95){
-        return pivotYLocation + 10;
+        cameraLoc = pivotYLocation + 10;
     }else if(playerCenterY > pivotYLocation + 60){
-        return pivotYLocation + 6;
+        cameraLoc = pivotYLocation + 6;
     }else if(playerCenterY > pivotYLocation + 40){ // bottom y camera deadzone
-        return pivotYLocation + 2;
+        cameraLoc = pivotYLocation + 2;
 
     }else if(playerCenterY < pivotYLocation - 230){ // top y camera bound
-        return pivotYLocation - 14;
+        cameraLoc = pivotYLocation - 14;
     }else if(playerCenterY < pivotYLocation - 150){
-        return pivotYLocation - 10;
+        cameraLoc = pivotYLocation - 10;
     }else if(playerCenterY < pivotYLocation - 94){
-        return pivotYLocation - 4;
+        cameraLoc = pivotYLocation - 4;
     }else if(playerCenterY < pivotYLocation - 80){ // top y camera deadzone
-        return pivotYLocation - 2;
+        cameraLoc = pivotYLocation - 2;
     }
 
+    if(cameraLoc + app.screen.height/2 > mapHeight){
+        cameraLoc = mapHeight - app.screen.height/2
+    }
 
-    return pivotYLocation;
+    return cameraLoc;
 }
 
 const updateCameraX = function(player:Controller){

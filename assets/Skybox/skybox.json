@@ -1,0 +1,55 @@
+{"frames": {
+
+"cloud.png":
+{
+	"frame": {"x":0,"y":0,"w":1376,"h":134},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1376,"h":136},
+	"sourceSize": {"w":1376,"h":136}
+},
+"mountain2.png":
+{
+	"frame": {"x":0,"y":137,"w":1376,"h":127},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1376,"h":127},
+	"sourceSize": {"w":1376,"h":127}
+},
+"pine1.png":
+{
+	"frame": {"x":0,"y":264,"w":1376,"h":148},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1376,"h":148},
+	"sourceSize": {"w":1376,"h":148}
+},
+"pine2.png":
+{
+	"frame": {"x":0,"y":412,"w":1376,"h":199},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1376,"h":199},
+	"sourceSize": {"w":1376,"h":199}
+},
+"sky.png":
+{
+	"frame": {"x":0,"y":610,"w":688,"h":211},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":688,"h":211},
+	"sourceSize": {"w":688,"h":211}
+}},
+"animations": {
+	"pine": ["pine1.png","pine2.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "skybox.png",
+	"format": "RGBA8888",
+	"size": {"w":1376,"h":821},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:31f1e34d83dcb7b8ce8184cb4bb53e2e:a9db2993ab7920eba6f8314d5a0249a7:3b5c7924f11aa2173c1c3f05e2b90c6c$"
+}
+}

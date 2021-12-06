@@ -9,6 +9,8 @@ import { SpriteManager } from "./SpriteManager";
 import { SoundManager } from "./SoundManager";
 import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregator";
 
+import { Skybox } from "./gameWorld/background/Skybox";
+
 import { initGameOverMenu } from "../menu/gameOverMenu";
 
 import * as mapMatrix from "../../xlstojson/leveltwo.json";
@@ -18,8 +20,11 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
         antialias:false,
         height:window.innerHeight,
         width:window.innerWidth,
-        backgroundColor:0x34202b
+        backgroundColor:0x608cbc
     });
+    const MAP_HEIGHT = mapMatrix.mapData[0].length * 32;
+    const MAP_WIDTH = mapMatrix.mapData.length * 32;
+    // original bg colour 0x34202b
     gameInit(app);
     document.querySelector<HTMLCanvasElement>("canvas")!.focus();
     // GAME OBJECTS INIT
@@ -29,20 +34,28 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
     const foregroundController = new ForegroundController(spriteManager, mapMatrix.mapData);
     const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
 
+    const skybox = new Skybox(MAP_WIDTH, MAP_HEIGHT, spriteManager);
+
     const update = function(app:PIXI.Application){
         player.update();
         enemyController.update(app,player.getPosition());
         foregroundController.update(app);
+
+        skybox.update(player.getPosition());
     }
     
     const eagerDraw = function(app:PIXI.Application){
+        skybox.draw(app);
+        foregroundController.staticDraw(app);
+
         player.draw(app);
         foregroundController.animatedDraw(app);
         enemyController.draw(app);
     }
 
     const lazyDraw = function(app:PIXI.Application){
-        foregroundController.staticDraw(app);
+        //skybox.draw(app);
+        //foregroundController.staticDraw(app);
     }
 
     const collisionChecker = function(player:Controller, enemyController:Controller[]){
@@ -82,7 +95,7 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
     lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
-        app.stage.pivot.y = lazyUpdateCameraY(player,app.stage.pivot.y)
+        app.stage.pivot.y = lazyUpdateCameraY(app, player, MAP_HEIGHT)
         update(app); // not setting x values in animationManager until update
         collisionChecker(player, enemyController.getControllers());
         eagerDraw(app); // Everything that needs to be redrawn every render goes here
