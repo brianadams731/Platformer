@@ -2,7 +2,7 @@ import {Application} from "pixi.js";
 import { position } from "../../interfaces/givesPosition";
 import { SpriteManager } from "../../SpriteManager";
 import {Sprite} from "pixi.js";
-import { SkyboxSprite } from "./SkyBoxSprite";
+import { SkyboxSprite } from "./SkyboxSprite";
 
 
 class Skybox{
