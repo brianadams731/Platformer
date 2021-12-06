@@ -25,8 +25,8 @@ const lazyUpdateCameraY = function(app:Application, player:Controller, mapHeight
         cameraLoc = pivotYLocation - 2;
     }
 
-    if(cameraLoc + app.screen.height/2 > mapHeight){
-        cameraLoc = mapHeight - app.screen.height/2
+    if(cameraLoc + app.screen.height/2 > mapHeight - 160){
+        cameraLoc = mapHeight - 160 - app.screen.height/2
     }
 
     return cameraLoc;

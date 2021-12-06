@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { SpriteManager } from "../../SpriteManager";
 import { Coin } from "../foreground/Coin";
-import { DirtGround } from "../foreground/DirtGround";
 import { Foreground } from "../foreground/Foreground";
 import { Spike } from "../foreground/Spike";
 
@@ -11,6 +10,11 @@ import { Spike } from "../foreground/Spike";
 import { Goal } from "../foreground/Goal";
 import { AnimatedForeground } from "../foreground/AnimatedForeground";
 import { StaticForeground } from "../foreground/StaticForeground";
+import { GrassTopMid } from "../foreground/earth/GrassTopMid";
+import { GroundRight } from "../foreground/earth/GroundRight";
+import { GroundLeft } from "../foreground/earth/GroundLeft";
+import { GrassTopRight } from "../foreground/earth/GrassTopRight";
+import { GrassTopLeft } from "../foreground/earth/GrassTopLeft";
 //import {getRandomInt} from "../../utils/randomInt";
 
 class ForegroundController {
@@ -101,13 +105,23 @@ class ForegroundController {
         for(let i = 0;i<mapMatrix.length;i++){
             for(let j = 0; j<mapMatrix[i].length;j++){
                 if(mapMatrix[i][j] === 1){
-                    this.foregrounds.push(new DirtGround(i*32,j*32, spriteManager))
+                    this.foregrounds.push(new GrassTopMid(i*32,j*32, spriteManager))
                 }else if(mapMatrix[i][j] === 2){
                     this.foregrounds.push(new Coin(i*32,j*32, spriteManager));
                 }else if(mapMatrix[i][j] === 3){
                     this.foregrounds.push(new Spike(i*32,j*32,spriteManager));
                 }else if(mapMatrix[i][j] === 5){
                     this.foregrounds.push(new Goal(i*32,j*32,spriteManager))
+                }
+
+                else if(mapMatrix[i][j] === 21){
+                    this.foregrounds.push(new GroundRight(i*32,j*32, spriteManager))
+                }else if(mapMatrix[i][j] === 22){
+                    this.foregrounds.push(new GroundLeft(i*32,j*32, spriteManager))
+                }else if(mapMatrix[i][j] === 23){
+                    this.foregrounds.push(new GrassTopLeft(i*32,j*32, spriteManager))
+                }else if(mapMatrix[i][j] === 24){
+                    this.foregrounds.push(new GrassTopRight(i*32,j*32, spriteManager))
                 }
             }
         }

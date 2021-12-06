@@ -11,7 +11,7 @@ import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregat
 
 import { initGameOverMenu } from "../menu/gameOverMenu";
 
-import * as mapMatrix from "../../xlstojson/leveltwo.json";
+import * as mapMatrix from "../../xlstojson/levelone.json";
 import { BackgroundController } from "./gameWorld/controllers/BackgroundController";
 
 function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):void{
@@ -55,8 +55,7 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
     }
 
     /*const lazyDraw = function(app:PIXI.Application){
-        skybox.draw(app);
-        foregroundController.staticDraw(app);
+        backgroundController.drawBackground(app);
     }*/
 
     const collisionChecker = function(player:Controller, enemyController:Controller[]){
@@ -93,7 +92,6 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
         }
     }
 
-    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
 
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
