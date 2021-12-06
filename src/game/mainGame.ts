@@ -9,43 +9,44 @@ import { SpriteManager } from "./SpriteManager";
 import { SoundManager } from "./SoundManager";
 import { EnemyControllerAggregator } from "./controllers/EnemyControllerAggregator";
 
-import { Skybox } from "./gameWorld/background/Skybox";
-
 import { initGameOverMenu } from "../menu/gameOverMenu";
 
 import * as mapMatrix from "../../xlstojson/leveltwo.json";
+import { BackgroundController } from "./gameWorld/controllers/BackgroundController";
 
 function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):void{
+    const MAP_HEIGHT = mapMatrix.mapData[0].length * 32;
+    const MAP_WIDTH = mapMatrix.mapData.length * 32;
+
     const app = new PIXI.Application({
         antialias:false,
         height:window.innerHeight,
         width:window.innerWidth,
-        backgroundColor:0x608cbc
+        backgroundColor:0x608cbc  // original bg color 0x34202b
     });
-    const MAP_HEIGHT = mapMatrix.mapData[0].length * 32;
-    const MAP_WIDTH = mapMatrix.mapData.length * 32;
-    // original bg colour 0x34202b
+
     gameInit(app);
     document.querySelector<HTMLCanvasElement>("canvas")!.focus();
+
     // GAME OBJECTS INIT
     const spriteManager =  spriteManagerOut;
     const player = new Player(spriteManager, 250,-100);
 
     const foregroundController = new ForegroundController(spriteManager, mapMatrix.mapData);
-    const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
+    const backgroundController:BackgroundController = new BackgroundController(MAP_WIDTH, MAP_HEIGHT, spriteManager);
 
-    const skybox = new Skybox(MAP_WIDTH, MAP_HEIGHT, spriteManager);
+    const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
 
     const update = function(app:PIXI.Application){
         player.update();
         enemyController.update(app,player.getPosition());
         foregroundController.update(app);
 
-        skybox.update(player.getPosition());
+        backgroundController.update(player.getPosition())
     }
     
     const eagerDraw = function(app:PIXI.Application){
-        skybox.draw(app);
+        backgroundController.draw(app);
         foregroundController.staticDraw(app);
 
         player.draw(app);
@@ -53,10 +54,10 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
         enemyController.draw(app);
     }
 
-    const lazyDraw = function(app:PIXI.Application){
-        //skybox.draw(app);
-        //foregroundController.staticDraw(app);
-    }
+    /*const lazyDraw = function(app:PIXI.Application){
+        skybox.draw(app);
+        foregroundController.staticDraw(app);
+    }*/
 
     const collisionChecker = function(player:Controller, enemyController:Controller[]){
         for(let i = 0; i < foregroundController.getForeground().length; i++){ // Player vs Foreground
@@ -92,7 +93,8 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
         }
     }
 
-    lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
+    //lazyDraw(app); // Pushed outside ticker in order to prevent excess rerenders
+
     app.ticker.add(()=>{
         app.stage.pivot.x = updateCameraX(player);
         app.stage.pivot.y = lazyUpdateCameraY(app, player, MAP_HEIGHT)

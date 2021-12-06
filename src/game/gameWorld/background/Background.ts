@@ -1,5 +1,4 @@
 import {Application} from "pixi.js";
-import {Sprite} from "pixi.js";
 
 class Background{
     
