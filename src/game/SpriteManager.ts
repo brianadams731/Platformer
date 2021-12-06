@@ -6,6 +6,7 @@ class SpriteManager{
     private slime: PIXI.Spritesheet|undefined;
     private cave: PIXI.Spritesheet|undefined;
     private skybox: PIXI.Spritesheet|undefined;
+    private decoration: PIXI.Spritesheet|undefined;
     private areAssetsLoaded: boolean;
 
     constructor(){
@@ -17,6 +18,7 @@ class SpriteManager{
             .add("../../assets/Slime/slime.json")
             .add("../../assets/Cave/cave.json")
             .add("../../assets/Skybox/skybox.json")
+            .add("../../assets/Decoration/decoration.json")
             .load(()=>{
                 this.ghost = PIXI.Loader.shared.resources["../../assets/Ghost/ghost.json"].spritesheet;
                 this.coin = PIXI.Loader.shared.resources["../../assets/Coin/coin.json"].spritesheet;
@@ -24,6 +26,7 @@ class SpriteManager{
                 this.slime = PIXI.Loader.shared.resources["../../assets/Slime/slime.json"].spritesheet;
                 this.cave = PIXI.Loader.shared.resources["../../assets/Cave/cave.json"].spritesheet;
                 this.skybox = PIXI.Loader.shared.resources["../../assets/Skybox/skybox.json"].spritesheet;
+                this.decoration = PIXI.Loader.shared.resources["../../assets/Decoration/decoration.json"].spritesheet;
                 this.areAssetsLoaded = true;
             })
     }
@@ -45,6 +48,9 @@ class SpriteManager{
     }
     public getSkybox():PIXI.Spritesheet{
         return this.skybox!;
+    }
+    public getDecoration():PIXI.Spritesheet{
+        return this.decoration!;
     }
     public getAreAssetsLoaded(){
         return this.areAssetsLoaded;

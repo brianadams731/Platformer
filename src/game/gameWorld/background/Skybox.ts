@@ -64,23 +64,23 @@ class Skybox{
         cloudSprite.x = x;
         cloudSprite.y = stageHeight - cloudSprite.height * 3;
         
-        this.clouds.push(new SkyboxSprite(cloudSprite,x,.8));
+        this.clouds.push(new SkyboxSprite(cloudSprite,x,.95));
     }
     private pushMountain(x:number, stageHeight:number, spriteManager:SpriteManager){
         const mountainsSprite = new Sprite(spriteManager.getSkybox().textures["mountain2.png"]);
         mountainsSprite.scale.x = 3;
         mountainsSprite.scale.y = 3;
         mountainsSprite.x = x;
-        mountainsSprite.y = stageHeight - mountainsSprite.height;
+        mountainsSprite.y = stageHeight - mountainsSprite.height * 2.1;
         
-        this.mountains.push(new SkyboxSprite(mountainsSprite,x,.7));
+        this.mountains.push(new SkyboxSprite(mountainsSprite,x,.9));
     }
     private pushTreeBack(x:number, stageHeight:number, spriteManager:SpriteManager){
         const treeSprite = new Sprite(spriteManager.getSkybox().textures["pine2.png"]);
         treeSprite.scale.x = 3;
         treeSprite.scale.y = 3;
         treeSprite.x = x;
-        treeSprite.y = stageHeight - treeSprite.height * 1.2;
+        treeSprite.y = stageHeight - treeSprite.height * 1.15;
         
         this.treeBack.push(new SkyboxSprite(treeSprite,x,.5));
     }

@@ -33,7 +33,7 @@ function mainGame(spriteManagerOut: SpriteManager, soundManager:SoundManager):vo
     const player = new Player(spriteManager, 250,-100);
 
     const foregroundController = new ForegroundController(spriteManager, mapMatrix.mapData);
-    const backgroundController:BackgroundController = new BackgroundController(MAP_WIDTH, MAP_HEIGHT, spriteManager);
+    const backgroundController:BackgroundController = new BackgroundController(MAP_WIDTH, MAP_HEIGHT, spriteManager, mapMatrix.mapData);
 
     const enemyController = new EnemyControllerAggregator(spriteManager, mapMatrix.mapData);
 
