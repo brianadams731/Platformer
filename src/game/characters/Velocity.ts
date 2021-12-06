@@ -11,10 +11,10 @@ class Velocity{
         this.xVelocity = 0;
         this.yVelocity = 0;
         this.maxXVelocity = maxXVelocity;
-        this.maxYVelocity = 16;
+        this.maxYVelocity = 14;
 
         this.friction = .6;
-        this.gravity = 1.5;
+        this.gravity = 1;
     }
 
     public addToXVelocity(addToX:number){
