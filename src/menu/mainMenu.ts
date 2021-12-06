@@ -16,7 +16,7 @@ const initMainMenu = (spriteManager:SpriteManager, soundManager:SoundManager, ga
                 <img id="cartrage" alt="splash image">
             </div>
             <div class="buttonWrapper">
-                <button id="playButton" class="arcadeBtn">Play</button>
+                <button id="playButton" class="arcadeBtn loadingBtn">Loading</button>
             </div>
         </div>
     `
@@ -52,7 +52,15 @@ const initMainMenu = (spriteManager:SpriteManager, soundManager:SoundManager, ga
         }
         menuNode.remove();
     })
-        
+    
+    const gameStarter = setInterval(()=>{
+        if(spriteManager.getAreAssetsLoaded()){
+            menuNode.querySelector<HTMLButtonElement>("#playButton")?.classList.remove("loadingBtn");
+            menuNode.querySelector<HTMLButtonElement>("#playButton")!.innerText = "Play"
+            clearInterval(gameStarter);
+        }
+    },1)
+
     body.appendChild(menuNode);
 }
 

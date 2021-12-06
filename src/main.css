@@ -75,6 +75,16 @@ canvas{
     outline: 0;
 }
 
+.loadingBtn{
+    background-color: #808080;
+    box-shadow: 0 6px #505050;
+}
+
+.loadingBtn:hover, .loadingBtn:active{
+    transform: none;
+    box-shadow: 0 6px #505050;
+}
+
 .remove-hover-pointer{
     cursor: default;
 }
