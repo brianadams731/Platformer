@@ -11,8 +11,8 @@ const initMainMenu = (spriteManager:SpriteManager, soundManager:SoundManager, ga
     menuNode.innerHTML = `
         <div class="mainMenuWrapper">
             <div class="titleBox">
-                <h1>Platformer</h1>
-                <h3>By Brian Adams</h3>
+                <h1 class="wait-to-show">Platformer</h1>
+                <h3 class="wait-to-show">By Brian Adams</h3>
                 <img id="cartrage" alt="splash image">
             </div>
             <div class="buttonWrapper">
@@ -25,6 +25,9 @@ const initMainMenu = (spriteManager:SpriteManager, soundManager:SoundManager, ga
 
     menuNode.querySelector<HTMLButtonElement>("#playButton")?.addEventListener("click",()=>{
         if(spriteManager.getAreAssetsLoaded()){
+            menuNode.querySelectorAll<HTMLHeadingElement>(".wait-to-show").forEach((item)=>{
+                item.style.opacity = "1";
+            })
             menuNode.querySelector<HTMLImageElement>("#cartrage")!.style.animationName = "dropDown";
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.style.animationName = "fadeOut";
             menuNode.querySelector<HTMLButtonElement>("#playButton")!.classList.add("remove-hover-pointer");
