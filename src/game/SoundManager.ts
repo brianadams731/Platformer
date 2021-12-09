@@ -6,13 +6,16 @@ class SoundManager{
     private soundtrack:Howl;
     constructor(){
         this.coinCollection = new Howl({
-            src:"/audio/coinSound.wav"
+            src:"/audio/coinSound.wav",
+            volume: .2,
         })
         this.hit = new Howl({
-            src:"/audio/hit.wav"
+            src:"/audio/hit.wav",
+            volume: .3,
         })
         this.soundtrack = new Howl({
             src:"/audio/soundtrack.mp3",
+            volume: .2,
             loop: true
         })
     }
