@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";    // RIP treeshaking, this is how the docs suggest to import
+import * as PIXI from "pixi.js";
 import { Controller } from "./controllers/Controller";
 import { checkCollision, invertCollisionObj} from "./utils/collider";
 import { lazyUpdateCameraY, updateCameraX } from "./utils/camera";
